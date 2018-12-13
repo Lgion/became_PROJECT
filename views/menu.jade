@@ -1,0 +1,22 @@
+menu#menu_principal.grid.ui.menu(role="menu")
+	span.item.one.wide.column
+	- let color=["w3-teal","teal","w3-light-blue","violet"]
+	each val,i in init.menus
+		//
+			#{val.sousmenu.length}
+		- var length=i==init.menus.length-1?"three":"four"
+		li.item.column.w3-teal(class=color[i] class=length).wide
+			+ancre(val.lien,"#!","h2",{a:{"data-data":val.id_menus},img:{class:"ui avatar image abs",role:"icon"},embeded:{class:"t0"}})
+				i.dropdown.icon.br0
+			for j,ii in val.sousmenu
+				- j.lien.href=val.lien.href+"="+j.lien.href
+				- j.lien["data-data"]=j.id_niveaux
+				- if(j.fk==1 && ii<val.sousmenu.length-3)
+					- j.lien["data-bool"]="false"
+			+ul_ancre(val.sousmenu,"#!","",{img:{class:"ui avatar image abs",role:"icon"}})
+	.ui.simple.dropdown.item.h100.tl0.abs.one.wide.column.black(title=init.start.menus.div.title)
+		i.sidebar.icon
+		i.dropdown.icon
+		+ul_ancre(init.start.menus.div.sousmenu,"","",{li:{class:"item dropmedown"}})#menu_secondaire.menu
+			form.search(role="search")
+				input#search

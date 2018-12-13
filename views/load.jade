@@ -1,0 +1,25 @@
+link(href="css/scss.css",rel="stylesheet")
+link(href="css/style_.css",rel="stylesheet")
+link(href="css/ad-min.css",rel="stylesheet")
+link(href="css/w3.css",rel="stylesheet")
+link(href="apis/materialize/css/materialize.min.css",rel="stylesheet")
+link(href="apis/ui/semantic.min.css",rel="stylesheet")
+
+script(src="apis/mustache/mustache.min.js")
+script(src="js/jquery.min.js")
+script(src="apis/ui/semantic.min.js")
+script(src="apis/materialize/js/materialize.min.js")
+script(src="js/fn.js")
+script(src="js/script.js")
+script(src="js/script_.js")
+script(src="js/ad-min.js")
+script.
+	var b_translates=JSON.parse("#{vars.b_translates}".replace(/&quot;/g,'"'))
+	var b_params=JSON.parse("#{vars.b_params}".replace(/&quot;/g,'"'))
+	// var b_translates={links:{tags:"blablabla",ressources:"blablabla",profs:"blablabla",users:"blablabla",classes:"blablabla"},sentences:{main_output_btn_descr:"Description",tags_title:"blablabla",users_title:"blablabla",profs_footerh3:"Liste des professeurs de cette matière",classes_footerh3:"La liste de classe de cette filière"}}
+	var req_obj=JSON.parse("#{vars.req}".replace(/&quot;/g,'"'))
+	req_obj.profs_id=1
+	req_obj.user=1
+	req_obj.user_={nom:"achi",prenom:"cyrille",img:"/imgs/socketio.jpg",avatar:"/imgs/avatar.jpg"}
+template#all_tpls
+	include ./load_tpls.jade

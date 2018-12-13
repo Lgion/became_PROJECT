@@ -1,0 +1,46 @@
+mixin meta(obj)
+	title(class="thetitle")= obj.title
+	meta(type="description",content="#{obj.description}",class="thedescription")/
+mixin meta_jsonld(obj)
+	script&attributes(attributes)= obj
+mixin meta_rs(obj)
+	- let rs=obj.rs,tmp=""
+	- for(a in rs){	tmp=rs[a].name||rs[a].property;tmp=tmp.substring(tmp.indexOf(':')+1);	if(rs[a].content=="_")	if(typeof obj[tmp]!="undefined")	rs[a].content=obj[tmp]
+	- }
+	for item in rs
+		meta&attributes(item)
+mixin ancre(obj={href:"void"},hash="",embeded="",adds={a:{},img:{},embeded:{}})
+	- if(obj.href!="void"){
+		- let tab={},adds_={a:{},img:{},embeded:{}}
+		- for(a in adds)adds_[a]=adds[a]
+		- for(a in obj)if(a.indexOf("data-")!=-1){tab[a]=obj[a];adds_.a[a]=obj[a]};tab={}
+		- if(obj.img)for(a in obj.img)if(a.indexOf("data-")!=-1){tab[a]=obj[a];adds_.img[a]=obj.img[a]}
+		//-
+			#{JSON.stringify(adds_)}
+			#{JSON.stringify(obj)}
+		a(
+			class=obj.class?obj.class:"",
+			href=obj.href?hash+obj.href:false,
+			title=obj.title||false
+		)&attributes(adds_.a)&attributes(attributes)
+			if embeded==""
+				| #{obj.html}
+			else
+				#{embeded}&attributes(adds_.embeded) #{obj.html}
+			- if(obj.img)
+				img(src=obj.img.src,title=obj.img.title,alt=obj.img.alt,class=obj.img.class?obj.img.class:"")&attributes(adds_.img)
+		- if(obj.ul){
+			+ul_ancre(obj.ul)
+			//-
+				#{JSON.stringify(obj.ul)}
+			- }
+	- }else{
+		| #!!#la variable obj est vide ! #!!#
+	- }
+mixin ul_ancre(obj,hash="",embeded="",adds={a:{},img:{},embeded:{},ul:{},li:{}})
+	- if(!adds.ul)adds.ul={}
+	- if(!adds.li)adds.li={}
+	ul&attributes(attributes)&attributes(adds.ul)
+		for val,i in obj
+			li&attributes(adds.li)
+				+ancre(val.lien,hash,embeded,adds)

@@ -1,0 +1,75 @@
+include mixins.jade
+include doctype.jade
+- var b_translates=JSON.parse(vars.b_translates)
+- var req=JSON.parse(vars.req)
+- var init_values={c_type:JSON.parse(init.values.c_type),courses_tags:JSON.parse(init.values.courses_tags)}
+//
+	#{init.values.c_type}
+html(lang=fr)
+	head
+		- var locals={meta:{general:{title:"page d'accueil du moyen de 'became' un homme meilleur",description:"je syius une description de contenu"},jsonld:"@context = Thing",rs:[{"name":"twitter:description","content":"teste de meta rs twitter"},{property:"og:title",content:"teste de meta fb"}]}}
+		block meta
+			+meta(init.accueil.lien.meta)
+			+meta_jsonld(init.accueil.lien.meta.jsonld)(type="application/json+ld")
+			+meta_rs(init.accueil.lien.meta)
+		link(href="css/style.css",rel="stylesheet")
+		script.
+			console.log('its just fine')
+		style.
+			body{margin:0;}
+	- let m=
+	body#bod.bod.h100.ui.grid(class=vars.context.periph)
+		button.tr0.z1000(onclick="req_obj.profs_id=2") notprof
+		block body			
+			header#header.sixteen.wide.column
+				img(src="",alt="",title="",role="logo")
+				nav#fildariane(role="navigation")
+					span= init.start.fildariane.span
+					+ancre(init.accueil.lien,"","",{img:{class:"ui avatar image abs"}}).home
+				include ./menu.jade
+			nav#left.one.wide.column.purple.off
+				hgroup
+					h3= init.start.left.hgroup[0]
+					h3= init.start.left.hgroup[1]
+					h3= init.start.left.hgroup[2]
+				- var left=[{class:"snowflake icon",src:"/",alt:"tutoriel.tv mathématique etc",title:"tutoriel.tv mathématique etc",href:"#",html:"Mathématique"}]
+				output
+					ul
+						span(onclick="$(this).closest('nav').removeClass('actived')",class="close") X
+						//-
+							each val,i in left
+								li: a(href="#{val.href}",title="#{val.title}")
+									i(class="#{val.class}")
+									img(src="#{val.src}",alt="#{val.alt}",title="#{val.title}")
+									|#{val.html}
+			include ./section_output.jade
+			main#main.sixteen.wide.column.scrolly(role="main")
+				include ./main_section.jade
+				article#main_article
+					header
+						h2= init.accueil.article.header.h
+						img(src=init.accueil.article.header.img.src,alt=init.accueil.article.header.img.alt,title=init.accueil.article.header.img.title)
+					.main
+						p
+							video(title=init.accueil.article.main.video.replace('-',' '))
+								source(src="#{init.accueil.article.main.video}.mp4")
+						p
+							audio(title=init.accueil.article.main.audio.replace('-',' '))
+								source(src="#{init.accueil.article.main.video}.mp3")
+						iframe(src=init.accueil.article.main.lvideo)
+						iframe(src=init.accueil.article.main.laudio)
+						p!= init.accueil.article.main.p
+					footer
+				hr
+				include ./main_output_form.jade
+			aside.banner(role="banner")
+			footer(role="contentinfo")
+				if ok
+					| whaaaaaat
+				else
+					| heeen, i prefer sluty durty b:tch
+				//include:markdown ./../package.json
+			#modals
+			div
+			
+	include ./load.jade

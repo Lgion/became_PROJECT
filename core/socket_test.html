@@ -1,0 +1,81 @@
+<html>
+	<head>
+		<title>
+		</title>
+		<meta charset='utf8'>
+		<style>
+		</style>
+		<script src="jquery.min.js"></script>
+		<script>
+		</script>
+	</head>
+	<body>
+		<button id="btn">connect to socketio</button>
+		<button id="btn_">connect to namespaced socketio</button>
+		<form id="chatForm">
+			<input id="msg">
+			<input type="submit">
+		</form>
+		<div id="oldmsg">
+		</div>
+		<div id="namespaced">
+		</div>
+	</body>
+	<script>		
+		var socket,socket0,socket1,socket2,i=0
+		msg.focus()
+		//let socket=io()
+		//let socket=io.connect("http://localhost:8080",{query:"pseudo=cyrille"})	//ca marche aussi
+		//let socket=io.connect({query:"pseudo=cyrille"})	//ca marche aussi
+		//let socket=io({query:"pseudo=cyrille"})
+		btn.onclick=function(){
+			let ok=document.createElement('script')
+			ok.setAttribute("src","/socketio/socket.io.js")
+			document.head.appendChild(ok)
+			setTimeout(function(){consocket()},1000)
+		}
+		btn_.onclick=function(){
+			let ok=document.createElement('script')
+			ok.setAttribute("src","/socketio/socket.io.js")
+			document.head.appendChild(ok)
+			setTimeout(function(){consocket_()},1000)
+		}
+		function consocket(){
+			socket=io.connect({query:"pseudo=cyrille&aa=bb"})	//ca marche aussi
+			socket.on('connected',(data,err)=>{
+				//alert(data)
+				oldmsg.innerHTML=data
+				socket.emit('functions',function(){console.log('jenvoe une fonction')}) 
+				socket.emit("okokiamin!","merci")
+				socket.send('socket.send')
+				socket.emit('pseudo','cyrille achi')
+				socket.emit('room','course_1')
+			})
+			socket.on('message',function(m){oldmsg.innerHTML+="<br>"+m})
+			socket.on('setting',function(m){oldmsg.innerHTML+="<br>"+m})
+			socket.on('joined',function(m){oldmsg.innerHTML+="<br>"+m})
+			socket.on('joined_',function(m){oldmsg.innerHTML+="<br>"+m})
+			socket.on('ok',function(m){oldmsg.innerHTML+="<br>"+m})
+		}
+		chatForm.onsubmit=function(e){
+			e.preventDefault()
+			socket.emit('newmsg',msg.value)
+			msg.value=''
+			msg.focus()
+		}
+		function consocket_(){
+			i++
+			i=i%3
+			socket0=io.connect("localhost:8081/zero",{query:"pseudo=cyrille"})	//ca marche aussi
+			socket1=io.connect("localhost:8081/un",{query:"pseudo=cyrille"})	//ca marche aussi
+			socket2=io.connect("localhost:8081/deux",{query:"pseudo=cyrille"})	//ca marche aussi
+			socket0.on('connect',function(){alert('je suis un emit du serveur recu, me signifiant uqe je suis connecté, mo namespace zéro')})
+			socket0.on('message',namespacedsocketio)
+			socket1.on('message',namespacedsocketio)
+			socket2.on('message',namespacedsocketio)
+		}
+		function namespacedsocketio(msg){namespaced.innerHTML+=msg}
+	</script>
+	<script src=""></script>
+	<style rel="stylesheet" href=""></style>
+</html>

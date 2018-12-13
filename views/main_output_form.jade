@@ -1,0 +1,50 @@
+form#main_output_form.ui.grid.scrolly
+	.head.w100.ui.grid.pr
+		h2.four.wide.column Choisir un coursfvm!ev;!
+		ul.choose.bl0.flex_around
+			li.oclasses
+				button(title=b_translates.buttons.main_output_form_choose.classes,type="button").pink-text.text-darken-1
+			li.oprofs
+				button(title=b_translates.buttons.main_output_form_choose.profs,type="button").purple-text.text-darken-1
+			li.oressources
+				button(title=b_translates.buttons.main_output_form_choose.ressources,type="button").yellow-text.text-darken-1
+			li.ocourses
+				button(title=b_translates.buttons.main_output_form_choose.courses,type="button").orange-text.text-darken-1
+			li.oqr
+				button(title=b_translates.buttons.main_output_form_choose.qr,type="button").green-text.text-darken-1
+		.six.wide.column.like_menu
+			h4 Legende
+			ul
+				li blablabla
+		.six.wide.column.like_menu
+			h4 Filtrer les résultats
+			div
+				button.button
+	output#main_output.fifteen.wide.column.scrolly(for="main_section_",form="main_output_form")
+		.output.classes.pink.darken-1.ui.grid
+		.output.profs.purple.darken-1.ui.grid
+		.output.ressources.yellow.darken-1.ui.grid
+		.output.courses.orange.darken-1.ui.grid
+		.output.qrs.green.darken-1.ui.grid
+	.one.wide.column
+		button#mo_btn_fix(title="accrocher le cadre à l'écran",onclick="alert('do somethig')")
+		i.icon.snowflake
+		label(for="radio_input"): i.icon.snowflake
+		div
+			i.icon.snowflake
+			input#radio_input(type="radio",name"radio_input")
+		label(for="radio_input_"): i.icon.snowflake
+		div
+			i.icon.snowflake
+			input#radio_input_(type="radio",name"radio_input_")
+		label(for="checkbox_input"): i.icon.snowflake
+		div
+			i.icon.snowflake
+			input#checkbox_input(type="radio",name"checkbox_input")
+		label(for="checkbox_input_"): i.icon.snowflake
+		div
+			i.icon.snowflake
+			input#checkbox_input_(type="radio",name"checkbox_input_")
+	.tr0.options
+		button.fix O
+		button.out X

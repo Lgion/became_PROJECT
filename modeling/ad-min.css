@@ -1,0 +1,87 @@
+
+/*sur le blog blog_buster---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.unsee{display:none;}
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*les class en phase test---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.aftshadow,.befshadow,.aftshadow_,.befshadow_{position:relative;}
+.aftshadow:after{content:"";width:100%;height:0;position:absolute;bottom:-1em;box-shadow: 0 0 1em 3px;left:0;}
+.aftshadow_:after{/*à copier su bafshadow_*/}
+.aftbefshadow:after{content:"";width:100%;height:0;position:absolute;top:-1em;box-shadow: 0 0 1em 3px;left:0;}
+.aftbefshadow_:after{content:"";width:100%;height:0;position:absolute;top:0em;box-shadow: 0 0 1em 3px;left:0;}
+
+.aftshadcovleft{position:relative;overflow:hidden;border-left:solid;}.aftshadcovleft:after{content:"";position:absolute;left:0;top:0;height:100%;box-shadow:0 0 7em 3em;}
+		.aftshadcovleft:hover:after{box-shadow:none;}.aftshadcovleft:hover{box-shadow:0 0 2em 3px;border-width:1em;}
+
+.bortop{border-top:1em solid;}
+.bortop_{border-top:solid;}
+.borbot_{border-bottom:solid;}
+.borbot{border-bottom:1em solid;}
+.borrgt_{border-right:solid;}
+.borrgt{border-right:1em solid;}
+.borlft_{border-left:solid;}
+.borlft{border-left:1em solid;}
+
+.asides_box{    box-shadow: 0 0 1em 1px;    padding: 1.5em;    border-radius: 5px;}
+.asides_box:hover{       box-shadow: 0em 0em 1em 1px inset;    border: 1px solid;    border-right: none;}
+.contents_box{    padding: 1.5em;    border-radius: 5px;}
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+/*sur la boutique prestashop---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.see{display:block !important;}
+.unsee{display:none !important;}
+.upH:hover{z-index:9999999999999 !important;}
+.up_{z-index:9999999999999 !important;}
+.up{z-index:99999 !important;}
+.down{z-index:0 !important;}
+.down_{z-index:-1 !important;}
+
+.adds_closer0{position:absolute;top:0;right:0;border-radius:2em;background:black;border:solid red;color:red;font-weight:900;line-height:1em;}
+
+
+.rendercover:hover:before{    CONTENT: "";    position: absolute;     WIDTH: 100%;    height: 100%;     z-index: 10;    }
+.render_cover:hover:before{    CONTENT: "";    position: absolute;     WIDTH: 120%;    height: 120%;     z-index: -1;    MARGIN: -10%;}
+.render_cover_:hover:before{    CONTENT: "";    position: absolute;     WIDTH: 140%;    height: 140%;    z-index: -1;    MARGIN: -40%;}
+._render_cover:hover+*:before,._render_cover+*:hover:before{    CONTENT: "";    position: absolute;     WIDTH: 120%;    height: 120%;          z-index: -1;    MARGIN: -10%;}
+._render_cover_:hover+*:before,._render_cover_+*:hover:before{    CONTENT: "";    position: absolute;     WIDTH: 140%;    height: 140%;    z-index: -1;    MARGIN: -40%;}
+
+#p_siti_ns{position:fixed;top:10em;left:0;}
+#p_siti_ns li{width:100px;height:25px;background:red;border:solid black;}
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.beforeABScover:before{content:"";z-index:-1;position:absolute;top:-1em;left:-1em;right:-1em;bottom:-1em;}
+.beforeABS:before{content:"";z-index:-1;position:absolute;top:0;left:0;right:0;bottom:0;}
+._beforeABS:before{content:"";z-index:-1;position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);}
+.beforeABS_:before{content:"";z-index:-1;position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(255,255,255,.5);}
+.ABS{position:absolute;top:0;left:0;right:0;bottom:0;}
+._middwhite{background:rgba(255,255,255,.3);}
+.middwhite{background:rgba(255,255,255,.5);}
+.middwhite_{background:rgba(255,255,255,.8);}
+.ABSmidddark:before{background:rgba(0,0,0,.5);}
+.midddark{background:rgba(0,0,0,.5);}
+.midddark_{background:rgba(0,0,0,.3);}
+.midddark__,#moi_table tr:hover{background:rgba(0,0,0,.1);}
+.pad{padding:.5em;}.pad_{padding:1em;}.pad__{padding:2em;}
+._pad{padding:.5em 0;}.__pad{padding:1em 0;}		._pad_{padding:0 .5em;}.__pad__{padding:0 1em;}
+.shadow{box-shadow:0 0 10px 1px black;}
+.shadowI{box-shadow:0 0 10px 1px black inset;}
+.Brad{border-radius:5px;}
+.BBrad{border-bottom-left-radius:5px;border-bottom-right-radius:5px;}
+.BBLrad{border-bottom-left-radius:5px;}
+.BBLrad_{border-bottom-left-radius:1.5em;}
+.BTrad{border-top-left-radius:5px;border-top-right-radius:5px;}
+.BRrad{border-top-right-radius:5px;border-bottom-right-radius:5px;}
+.BLrad{border-top-left-radius:5px;border-bottom-left-radius:5px;}
+.BLrad_{border-top-left-radius:1.5em;border-bottom-left-radius:1.5em;}
+.BTRrad{border-top-right-radius:5px;}
+.BTLrad{border-top-left-radius:5px;}
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------*/

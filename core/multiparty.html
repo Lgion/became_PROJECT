@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<title>
+		</title>
+		<meta charset='utf8'>
+		<style>
+		</style>
+		<script src="/js/jquery.min.js"></script>
+		<script>
+		</script>
+	</head>
+	<body>
+		<form onsubmit="event.preventDefault();$.ajax({url:'/testee',type:'post',data:new FormData(this),success:function(){alert('ok')},processData:false,contentType:false})" method="POST" id="chatForm" enctype="multipart/form-data">
+			<input id="msg" type="file" name="ok">
+			<input type="submit">
+		</form>
+		<div id="oldmsg">
+		</div>
+		<div id="namespaced">
+		</div>
+	</body>
+	<script>		
+	</script>
+	<script src=""></script>
+	<style rel="stylesheet" href=""></style>
+</html>

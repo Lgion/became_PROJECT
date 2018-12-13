@@ -1,0 +1,11 @@
+{
+  "name": "became",
+  "version": "1.0.0",
+  "description": "1er version le 03/10/2017",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

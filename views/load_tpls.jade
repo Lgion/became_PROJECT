@@ -1,0 +1,479 @@
+.classes_tpl
+.profs_tpl
+.ressources_tpl
+	div.four.wide.column
+		div
+			.w100.pr.top
+				span.br0 {{obj_.date}}
+				a(href="{{obj.lien.href}}",title="{{obj.lien.title}}",data-data="{{obj.id}}") {{obj.lien.html}}
+			nav.w25.br0
+				div.tags {{{obj.tags}}}
+				div.prof
+					- var ok={href:"{{obj.user.href}}",html:"{{obj.user.html}}",title:"{{obj.user.title}}",img:{src:"{{obj.user.img.src}}",alt:"{{obj.user.img.alt}}",title:"{{obj.user.img.title}}"}}
+					+ancre(ok,"","",{a:{"data-data":"{{obj.user.data}}"}})
+				div.type(title="{{obj_.type}}")  <i class="{{obj.type}} r_{{obj_.type_id}}">r_{{obj_.type_id}}</i>
+				button.descr(type="button")= b_translates.sentences.main_output_btn_descr
+			p.scrolly.bl0.description
+				span.close X
+				| {{obj.descr}}
+			div.bl0.w75
+				div.w50
+					div.likes(data-data="{{obj_.likes}}") {{obj.likes_}}
+					div.shares {{obj_.shares}}
+					div.views(data-data="{{obj_.views}}",data-3months="{{obj.views__}}") {{obj.views_}}
+					div.coms(data-data="{{obj_.coms}}") {{obj.coms_}}
+				div.w50
+					div.language
+						i(class="l_{{obj_.langue}}") {{obj_.langue}}
+						i(class="p_{{obj_.pays}}") {{obj_.pays}}
+					div.note(data-data="{{obj_.note}}") {{obj.note_}}
+						span.badge {{obj.note__}}
+					div.media void
+					div.price {{obj.prix}}
+			div.inmodal
+.courses_tpl
+	div.four.wide.column
+		div
+			.w100.pr.top
+				span.br0 {{obj_.date}}
+				a(href="{{obj.lien.href}}",title="{{obj.lien.title}}",data-data="{{obj.id}}",data-data_="{{obj.ids}}") {{obj.lien.html}}
+			nav.w25.br0
+				div.tags {{{obj.tags}}}
+				div.prof
+					- var ok={href:"{{obj.user.href}}",html:"{{obj.user.html}}",title:"{{obj.user.title}}",img:{src:"{{obj.user.img.src}}",alt:"{{obj.user.img.alt}}",title:"{{obj.user.img.title}}"}}
+					+ancre(ok,"","",{a:{"data-data":"{{obj.user.data}}"}})
+				div.type(title="{{obj_.type_}}")  <i class="{{obj.type}} r_{{obj_.type_id}}">r_{{obj_.type_id}}</i>
+				button.descr(type="button")= b_translates.sentences.main_output_btn_descr
+			p.scrolly.bl0.description
+				span.close X
+				| {{obj.descr}}
+			div.bl0.w75
+				div.w50
+					div.likes(data-data="{{obj_.likes}}") {{obj.likes_}}
+					div.shares {{obj_.shares}}
+					div.views(data-data="{{obj_.views}}",data-3months="{{obj.views__}}") {{obj.views_}}
+					div.coms(data-data="{{obj_.coms}}") {{obj.coms_}}
+				div.w50
+					div.language
+						i(class="l_{{obj_.langue}}") {{obj_.langue}}
+						i(class="p_{{obj_.pays}}") {{obj_.pays}}
+					div.note(data-data="{{obj_.note}}") {{obj.note_}}
+						span.badge {{obj.note__}}
+					div.media void
+					div.price {{obj_.prix}}
+			div.inmodal
+.qrs_tpl
+			
+			
+			
+			
+			
+.ressource_tpl
+	h2.tl0= b_translates.section.ressources.span
+	header.w25.childs_fl_.scrolly
+		h3.pr {{obj.lien.html}}
+			a.br0(href="{{obj.lien.href}}" title="{{obj.lien.title}}")= b_translates.section.general.header.lien
+		.likes <i class="icon Heartbeat"></i> #{b_translates.section.general.header.likes} : <div class="val">{{obj.likes_}}</div>
+		.shares <i class="icon External Share"></i> #{b_translates.section.general.header.shares} : <div class="val">{{obj_.shares}}</div>
+		.views(onclick="views_graph($(this).find('.val')") <i class="icon Unhide"></i> #{b_translates.section.general.header.views} : <div class="val"><button><i class="icon Area Chart"></i></button> {{obj.views_}}</div>
+		.note <i class="icon Star Half Empty"></i> #{b_translates.section.general.header.note} : <div class="val"><div class="on" style="width:calc({{obj.note_}} * 20%)"></div></div>
+		.langue(title="{{langue : [fr]}}, {{pays : [fr]}}") <i class="icon Flag Checkered"></i> #{b_translates.section.general.header.langue} : <div class="val"><i class="icon_lang_{{obj_.langue}}"></i> <i class="icon_pays_{{obj_.pays}}"></i></div>
+		.type <i class="icon Eyedropper"></i> #{b_translates.section.general.header.type} : <div class="val" title="{{obj_.type}}"><i class="icon_type_r_{{obj_.type_id}}"></i></div>
+		.dls <i class="icon Cloud Download"></i> #{b_translates.section.ressources.header.dls} : <div class="val">{{}}</div>
+		.auteur <i class="icon Address Book"></i> #{b_translates.section.general.header.auteur} : <div class="val"><a href="{{obj.user.href}}" title="{{obj.user.title}}">{{obj.user.html}}</a></div>
+		.date <i class="icon add to Calendar"></i> #{b_translates.section.general.header.date} : <div class="val">{{obj_.date}}</div>
+		button.coms <i class="icon Comments"></i> #{b_translates.section.general.header.coms} : <div class="val badge">{{obj.coms_}}<div class="coms_ nodisplay">{{obj_.coms}}</div></div>
+		button.descr(title="{{obj.lien.title}}") <i class="icon Browser"></i> #{b_translates.section.general.header.descr} : <div class="val nodisplay">{{obj.descr}}</div>
+		button.tags <i class="icon tags"></i> #{b_translates.section.general.header.tags} : <div class="val nodisplay">{{{obj.tags}}}</div>
+		hr
+		.act.childs_fl
+			button.like(title=b_translates.section.general.header.like): i.icon.Thumbs.Outline.Up
+			button.share(title=b_translates.section.general.header.share): i.icon.External.Share
+			button.note_(title=b_translates.section.general.header.note_): i.icon.Star.Half.Empty
+			button.comment(title=b_translates.section.general.header.comment): i.icon.Edit
+			button.findsimilar(title=b_translates.section.ressources.header.similar): i.icon.Find
+		.acted
+			span.close X
+	.main.w25.scrolly
+		.title.pr= b_translates.section.ressources.main.title
+			a.zip.br0(href="/ressources/_{{obj_.id_ressources}}/zip.rar",download="{{obj.dl_relinked}}"): i.icon.Download
+		hr
+		ol
+			| {{{obj.json}}}
+	footer.w50
+		.title.pr= b_translates.section.ressources.footer.title
+			a.zip.fr: i.icon.Download
+			button.fr(title=b_translates.section.ressources.footer.resize)
+				i.window.maximize.icon
+		.containers
+			iframe
+			img
+			audio
+			video
+	span._modal.trbl0
+		button.fr.reduce(title=b_translates.section.ressources.footer.resize_): i.window.minimize.icon
+		button.fr.view(title=b_translates.section.ressources.footer.view): i.icon.maximize
+		button.fr.color(title=b_translates.section.ressources.footer.color): i.icon.paint.brush
+		h3
+		h4
+		.contain.rbl0.flex_around
+		
+.course_tpl
+	h2.tl0= b_translates.section.courses.span
+	header.w25.childs_fl_.scrolly
+		h3.pr {{obj.lien.html}}
+			a.br0(href="{{obj.lien.href}}" title="{{obj.lien.title}}")= b_translates.section.general.header.lien
+		.likes <i class="icon Heartbeat"></i> #{b_translates.section.general.header.likes} : <div class="val">{{obj.likes_}}</div>
+		.shares <i class="icon External Share"></i> #{b_translates.section.general.header.shares} : <div class="val">{{obj_.shares}}</div>
+		.views(onclick="views_graph($(this).find('.val')") <i class="icon Unhide"></i> #{b_translates.section.general.header.views} : <div class="val"><button><i class="icon Area Chart"></i></button> {{obj.views_}}</div>
+		.note <i class="icon Star Half Empty"></i> #{b_translates.section.general.header.note} : <div class="val"><div class="on" style="width:calc({{obj.note_}} * 20%)"></div></div>
+		.langue(title="{{langue : [fr]}}, {{pays : [fr]}}") <i class="icon Flag Checkered"></i> #{b_translates.section.general.header.langue} : <div class="val"><i class="icon_lang_{{obj_.langue}}"></i> <i class="icon_pays_{{obj_.pays}}"></i></div>
+		.type <i class="icon Eyedropper"></i> #{b_translates.section.general.header.type} : <div class="val" title="{{obj_.type}}"><i class="icon_type_r_{{obj_.type_id}}"></i></div>
+		//-.dls <i class="icon Cloud Download"></i> #{b_translates.section.ressources.header.dls} : <div class="val">{{}}</div>
+		.auteur <i class="icon Address Book"></i> #{b_translates.section.general.header.auteur} : <div class="val"><a href="{{obj.user.href}}" title="{{obj.user.title}}">{{obj.user.html}}</a></div>
+		.date <i class="icon add to Calendar"></i> #{b_translates.section.general.header.date} : <div class="val">{{obj_.date}}</div>
+		button.coms <i class="icon Comments"></i> #{b_translates.section.general.header.coms} : <div class="val badge">{{obj.coms_}}<div class="coms_ nodisplay">{{obj_.coms}}</div></div>
+		button.descr(title="{{obj.lien.title}}") <i class="icon Browser"></i> #{b_translates.section.general.header.descr} : <div class="val nodisplay">{{obj.descr}}</div>
+		button.tags <i class="icon tags"></i> #{b_translates.section.general.header.tags} : <div class="val nodisplay">{{{obj.tags}}}</div>
+		hr
+		.act.childs_fl
+			button.like(title=b_translates.section.general.header.like): i.icon.Thumbs.Outline.Up
+			button.share(title=b_translates.section.general.header.share): i.icon.External.Share
+			button.note_(title=b_translates.section.general.header.note_): i.icon.Star.Half.Empty
+			button.comment(title=b_translates.section.general.header.comment): i.icon.Edit
+			button.findsimilar(title=b_translates.section.courses.header.similar): i.icon.Find
+		.acted
+			span.close X
+	.main.w75.bg-whites
+		p.h75.scrolly {{obj_.descr}}
+		//img(src="/courses/_{{obj_.id_courses}}/main.png" alt="{{obj_.name}}" title="{{obj_.title}}" role="").h25
+	footer.safe.h25.w75
+		button#course_footer_btn(data-data="{{obj.opened}}",data-id='{{obj_.id_courses}}').ab= b_translates.section.courses.footer.button
+			span(class="{{obj.opened_}}") {{obj.opened}}
+	span._modal.trbl0(class="{{obj._modalclass}}",data-done="[]",data-started="{{obj.started}}",data-ended="{{obj.ended}}",data-start="{{obj.start}}",data-end="{{obj.end}}",data-duree="{{obj_.duree}}")
+		.btns.childs_fl.trl0
+			button.fr.reduce(title=b_translates.section.ressources.footer.resize_): i.window.minimize.icon
+			button.fr(onclick="$(this).closest('span').toggleClass('prof');$(this).closest('span').toggleClass('students');"): i.star.icon
+			button.fr(onclick="$(this).parent().toggleClass('pc');$(this).parent().parent().toggleClass('mobile');"): i.star.half.icon
+		.prof(data-started="{{obj.started}}",data-ended="{{obj.ended}}",data-end="{{obj.end}}",class="{{obj.started_}} {{obj.ended}}")
+			.timeline.afterfull
+				.line
+					#running_tl.h100(style="width:0%;position:absolute;background:rgba(255,0,0,.5)")
+					.void= b_translates.section.courses._modal.prof.tl_line_void
+					.tl.pr(data-duree="{{obj_.duree}}")
+						.rendertime.r0.bg-white(style="height:1em;top:-1em;border:1px dotted red")
+				.options.pr
+					input(type="submit").r0
+					label(for=tl_select)= b_translates.section.courses._modal.prof.tl_opts_select
+					select#tl_select
+						option(value="void" selected) jsvnvsfnChosiir une phaseOIjijo
+					hr
+					label(for=tl_opts_phs)= b_translates.section.courses._modal.prof.tl_opts_phs
+					input#tl_opts_phs(placeholder=b_translates.section.courses._modal.prof.tl_opts_ph)
+					label(for=tl_opts_time)= b_translates.section.courses._modal.prof.tl_opts_time
+					input#tl_opts_time(type="time",value="00:00",min="00:00",max="{{obj.duree_}}")
+					label(for=tl_opts_time_)= b_translates.section.courses._modal.prof.tl_opts_time_
+					input#tl_opts_time_(type="time",value="00:00",min="00:00",max="{{obj.duree_}}")
+					hr
+					label(for=tl_opts_add_rsc)= b_translates.section.courses._modal.prof.tl_add_rsc
+					input#tl_opts_add_rsc(readonly)
+					label(for=tl_add_rsc_time)= b_translates.section.courses._modal.prof.tl_add_rsc_time
+					input#tl_add_rsc_time(type="time",value="00:00",min="00:00",max="00:00")
+					label(for=tl_add_rsc_time_)= b_translates.section.courses._modal.prof.tl_add_rsc_time_
+					input#tl_add_rsc_time_(readonly)
+					label(for=tl_opts_modify)= b_translates.section.courses._modal.prof.tl_modify
+					input#tl_opts_modify(readonly)
+			.r.not
+				ul.list
+				ol.scrolly
+				button.load charger ressouohoueseviufno
+			.notifications
+				button.asks 0
+				button.answers 0
+				.asks_
+				.answers_
+			.live.pr
+				button.audio(title="iueheParler avec le microphone aux élèves en directiuooecn"): i.icon.unmute
+				button.video(title="eihfiParler avec la webcam aux élèves en directiuooecn"): i.icon.record
+				button.text(title="eueuEcrire en directiuooecn"): i.icon.text.cursor
+				button.ask(title="ieuoPoser une question en directiuooecn"): i.icon.Help.Circle.Outline
+				button.file(title="edjifdjBalancer un fichier aux élèvesiuooecn"): i.icon.Folder.Open.Outline
+				div.qr
+					button.asked(title="rgvrgbvgbvoir questions et réponsesiuooecn"): i.icon.unhide
+					span.badge.fr
+					.choice
+					.p
+					.s
+				.textarea.pr.nodisplay
+					.text_ask
+						span.closejq_.to_2.z100 X
+						label(for="i_profsendftext").text.nodisplay ekjniufhirFaire un commentaire, poser un note ou faire une remarque.eieujieej
+						label(for="i_profsendftext").ask.nodisplay rjegueuPoser une question pédagogique à l'attention des élèves.eifvjoiu
+						textarea#i_profsendftext.w100.h100.p_n1.b0
+						.bl0.w75.o_.overhidden_
+							input#i_profsendftext_cb(type="checkbox")
+							label(for="i_profsendftext_cb") ufviiuheueChosir d'afficher ce contenu aussi sous la resssource courant pendant 60 secondes.fzouhouehiue
+						input(type="submit").br0
+					form(enctype="multipart/form-data")
+						span.closejq_.to_2 X
+						label(for="i_profsendfile") ehuiehouChoisir un fichier, puis valider pour l'envoyer à tous les élèves.euieoeuoe
+						input(type="file",id="i_profsendfile",name="live_sendfile")
+						input(type="submit")
+					.gum.childs_fl.b0.bg-white.bs.w100(data-audio=b_translates.section.courses._modal.live.label_gum_audio,data-video=b_translates.section.courses._modal.live.label_gum_video,data-screencast=b_translates.section.courses._modal.live.label_gum_screencast)
+						span.closejq_.to_2 X
+						button.start(title=b_translates.section.courses._modal.live.title_gum_start): i(class="icon play")
+						button.pause(title=b_translates.section.courses._modal.live.title_gum_pause): i(class="icon pause")
+						button.stop(title=b_translates.section.courses._modal.live.title_gum_stop): i(class="icon stop")
+						p.b0= b_translates.section.courses._modal.live.gum_descr
+						video(autoplay)
+						audio(autoplay)
+		.students.pr(data-started="{{obj.started}}",data-ended="{{obj.ended}}",data-end="{{obj.end}}",class="{{obj.started_}} {{obj.ended}}")
+			.line
+				#running_tl.h100(style="width:0%;position:absolute;background:rgba(255,0,0,.5)")
+				.void= b_translates.section.courses._modal.prof.tl_line_void
+				.tl.pr(data-duree="{{obj_.duree}}")
+					.rendertime.r0.bg-white(style="height:1em;top:-1em;border:1px dotted red")
+			.status
+				.professeur
+			.qr
+				.choice
+				.p
+				.s
+			div.textarea.b0.h25.w100
+				label
+				textarea.h100.p_n1
+				input(type="submit",data-answer=b_translates.section.courses._modal.live.asked_answer_label,data-ask=b_translates.section.courses._modal.live.student_ask_label).br0
+		.contain.pr
+			.render_time.l0.bg-white(style="height:1em;top:-1em;border:1px dotted red")
+			.stats
+				.connected 0
+				.users
+			.msgs.w100
+			h3 je suis un titre d'exemple
+			.live.fr.scrolly.z100
+				// div.time: audio/video/p
+				.iframe.trbl0.scrolly
+					i.icon.Window.maximize.fl
+					iframe.w100
+					span.closejq X
+				.img.trbl0.scrolly
+					i.icon.Window.maximize.fl
+					img.w100
+					span.closejq X
+				.audio.trbl0.scrolly
+					i.icon.Window.maximize.fl
+					audio.w100(autoplay)
+					span.closejq X
+				.video.trbl0.scrolly
+					i.icon.Window.maximize.fl
+					video.w100(autoplay,controls,data-i="0")
+					span.closejq X
+			//-
+				.student_ask.nodisplay.h100
+					span.closejq X
+					label(for="live_student_ask") fiuuiujizPoser votre question
+					textarea#live_student_ask.h25
+					input(type="submit")
+				.asked.nodisplay.h100
+					span.closejq X
+					.question
+					.answers.scrolly
+					div.h25.b0
+						label(for="live_ask_ta") fiuuiujizRépondre
+						textarea#live_ask_ta
+						button.answer(title=b_translates.section.courses._modal.live.opt_answer)= b_translates.section.courses._modal.live.asked_answer_btn
+				
+			.rscs.fl
+				// div.time: audio/video/p
+				h3
+				p
+				img
+				audio(autoplay,controls)
+				video(autoplay,controls)
+				iframe
+				.actived.opts.tl0
+					label(for="rscs_opt_width") Width ?
+					input#rscs_opt_width.width(type="range")
+					label(for="rscs_opt_height") Height ?
+					input#rscs_opt_height.height(type="range")
+					button.fs(title=b_translates.section.courses._modal.live.opt_fs): i.icon.window.maximize
+					button.ask(title=b_translates.section.courses._modal.live.opt_ask): i.icon.help.circle.output
+				.comments(style="transition:opacity 1.5s").rbl0.h25.z100.bs.actived.scrolly.bg-whiteS.boxS_.p1
+					div
+						button.target(title=b_translates.section.courses._modal.rscs_comopt_target): i.icon.anchor
+					.comment
+
+
+
+
+
+
+
+
+- var world_pays=JSON.parse(vars.world_pays)
+- var form_add_lang=JSON.parse(vars.form_add_lang)
+form#form_add_things(enctype="multipart/form-data")
+	span.close X
+	header
+		h2.niveaux= b_translates.for_modals.titres.niveaux
+		h2.filieres= b_translates.for_modals.titres.filieres
+		h2.matieres= b_translates.for_modals.titres.maiteres
+		h2.sujets= b_translates.for_modals.titres.sujets
+		h2.courses= b_translates.for_modals.titres.courses
+		h2.ressources= b_translates.for_modals.titres.ressources
+		h2.profs= b_translates.for_modals.titres.profs
+		h2.classes= b_translates.for_modals.titres.classes
+	hr
+	fieldset.values.scrolly
+		h2= b_translates.for_modals.general.fieldset_h2
+		.input-field.niveaux.dis
+			i.icon.unlinkify.prefix
+			select#fot_from_niveaux.icons(name="niveaux",required)
+				option(value="void",disabled,selected,data-icon="/imgs/select_void.png",class="left circle")=  b_translates.for_modals.nfms.inputs.select
+				each val,i in init.menus
+					option(value=val.id_menus,data-icon=val.lien.img,class="left circle")= val.lien.html
+			label(for="fot_from_niveaux") #{b_translates.for_modals.nfms.inputs._menu}#{b_translates.for_modals.nfms.inputs.masculin}#{b_translates.for_modals.nfms.alias.niveaux} ?
+			label(for="fot_from_niveaux") #{b_translates.for_modals.nfms.inputs._menu_}#{b_translates.for_modals.nfms.inputs.masc}#{b_translates.for_modals.nfms.alias.menus}
+		.input-field.filieres
+			i.icon.unlinkify.prefix
+			select#fot_from_filieres.icons(name="filieres")
+				option(value="void",disabled,selected,data-icon="/imgs/select_void.png",class="left circle")=  b_translates.for_modals.nfms.inputs.select
+			label(for="fot_from_filieres") #{b_translates.for_modals.nfms.inputs._menu}#{b_translates.for_modals.nfms.inputs.feminin}#{b_translates.for_modals.nfms.alias.filieres} ?
+			label(for="fot_from_filieres") #{b_translates.for_modals.nfms.inputs._menu_}#{b_translates.for_modals.nfms.inputs.masc}#{b_translates.for_modals.nfms.alias.niveaux}
+		.input-field.matieres
+			i.icon.unlinkify.prefix
+			select#fot_from_matieres.icons(name="matieres")
+				option(value="void",disabled,selected,data-icon="/imgs/select_void.png",class="left circle")=  b_translates.for_modals.nfms.inputs.select
+			label(for="fot_from_matieres") #{b_translates.for_modals.nfms.inputs._menu}#{b_translates.for_modals.nfms.inputs.feminin}#{b_translates.for_modals.nfms.alias.matieres} ?
+			label(for="fot_from_matieres") #{b_translates.for_modals.nfms.inputs._menu_}#{b_translates.for_modals.nfms.inputs.fem}#{b_translates.for_modals.nfms.alias.filieres}
+		.input-field.sujets
+			i.icon.unlinkify.prefix
+			select#fot_from_sujets.icons(name="sujets")
+				option(value="void",disabled,selected,data-icon="/imgs/select_void.png",class="left circle")=  b_translates.for_modals.nfms.inputs.select
+			label(for="fot_from_sujets") #{b_translates.for_modals.nfms.inputs._menu}#{b_translates.for_modals.nfms.inputs.masculin}#{b_translates.for_modals.nfms.alias.sujets} ?
+			label(for="fot_from_sujets") #{b_translates.for_modals.nfms.inputs._menu_}#{b_translates.for_modals.nfms.inputs.fem}#{b_translates.for_modals.nfms.alias.matieres}
+		.input-field.upper
+			i.icon.unlinkify.prefix
+			select#fot_from_upper.icons(name="upper")
+				option(value="void",disabled,selected,data-icon="/imgs/select_void.png",class="left circle")=  b_translates.for_modals.nfms.inputs.select
+			label(for="fot_from_sujets") #{b_translates.for_modals.nfms.inputs._menu}#{b_translates.for_modals.nfms.inputs.masculin_}#{b_translates.for_modals.nfms.alias.elts} ?
+		section.nfms
+			.input-field
+				i.icon.tags.prefix
+				input(id="fot_add_label",name="label",class="",type="text",required)
+				label(for="fot_add_label")= b_translates.for_modals.nfms.inputs._label
+			.input-field
+				i.icon.info.prefix
+				input(id="fot_add_titre",name="titre",class="",type="text",required)
+				label(for="fot_add_titre")= b_translates.for_modals.nfms.inputs._titre
+			.input-field
+				i.icon.linkify.prefix
+				input(id="fot_add_url",name="url",class="",type="text",required)
+				label(for="fot_add_url")= b_translates.for_modals.nfms.inputs._url
+			.input-field
+				i.icon.paragraph.prefix
+				textarea.materialize-textarea(id="fot_add_descr",name="descr",class="",required)
+				label(for="fot_add_descr")= b_translates.for_modals.nfms.inputs._descr
+			.input-field
+				i.icon.at.prefix
+				input(id="fot_add_alias",name="alias",class="",type="text",required)
+				label(for="fot_add_alias")= b_translates.for_modals.nfms.inputs._alias
+		section.courses
+			.input-field
+				i.icon.flag.checkered.prefix
+				select#foc_add_pays.icons(name="pays",required)
+					option(value="void",disabled,data-icon="/imgs/select_void.png",class="left circle")=  b_translates.for_modals.nfms.inputs.select
+					for item in world_pays
+						- let tmp=req.pays==item.Code2.toLowerCase()?"true":"false"
+						//
+							#{req.pays} == #{item.Code2.toLowerCase()}
+						option(value=item.Code2,selected=tmp,data-icon="/imgs/select_void.png",class="left circle")= item.Name
+				label(for="foc_add_pays")= b_translates.for_modals.nfms.inputs._pays
+			.input-field
+				i.icon.world.prefix
+				select#foc_add_langue.icons(name="langue",required)
+					option(value="void",disabled,data-icon="/imgs/select_void.png",class="left circle")=  b_translates.for_modals.nfms.inputs.select
+					for item in form_add_lang
+						- let tmp=req.lang==item.id?"true":"false"
+						//
+							#{req.lang} == #{item.id}
+						option(value=item.id,selected=tmp,data-icon="/imgs/select_void.png",class="left circle")= item.label
+				label(for="foc_add_langue")= b_translates.for_modals.nfms.inputs._langue
+			.input-field
+				i.icon.hashtag.prefix
+				select#foc_add_htag.icons(onchange="let tmp=$(this).next().next()[0];if(tmp.value!='')tmp.value+=',';tmp.value+=this.value")
+					option(selected,value="void",disabled,data-icon="/imgs/select_void.png",class="left circle")=  b_translates.for_modals.nfms.inputs.select
+					for item in init_values.courses_tags
+						option(value=item.id,data-icon="/imgs/select_void.png",class="left circle")= item.label
+				label(for="foc_add_htag")= b_translates.for_modals.nfms.inputs._htag
+				input(name="htag",class="",type="hidden",required)
+				input(readonly,class="",type="text")
+			.input-field
+				i.icon.tags.prefix
+				input(id="foc_add_label",name="label",class="",type="text",required)
+				label(for="foc_add_label")= b_translates.for_modals.nfms.inputs._label
+			.input-field
+				i.icon.info.prefix
+				input(id="foc_add_titre",name="titre",class="",type="text",required)
+				label(for="foc_add_titre")= b_translates.for_modals.nfms.inputs._titre
+			.input-field
+				i.icon.linkify.prefix
+				input(id="foc_add_url",name="url",class="",type="text",required)
+				label(for="foc_add_url")= b_translates.for_modals.nfms.inputs._url
+			.input-field
+				i.icon.paragraph.prefix
+				textarea.materialize-textarea(id="fot_add_sh_descr",name="sh_descr",class="",required)
+				label(for="fot_add_sh_descr")= b_translates.for_modals.nfms.inputs._sh_descr
+			.input-field
+				i.icon.paragraph.prefix
+				textarea.materialize-textarea(id="foc_add_descr",name="descr",class="",required)
+				label(for="foc_add_descr")= b_translates.for_modals.nfms.inputs._descr_
+			.input-field
+				i.icon.calendar.end.prefix
+				input(id="foc_add_date",name="date",class="",type="date",required)
+				input(id="foc_add_duration",name="time",class="",type="time",required)
+				label.active(for="foc_add_date")= b_translates.for_modals.nfms.inputs._date
+			.input-field
+				i.icon.hourglass.end.prefix
+				input(id="foc_add_duration",name="duration",class="",type="number",required)
+				label.active(for="foc_add_duration")= b_translates.for_modals.nfms.inputs._duration
+			.input-field
+				i.icon.list.prefix
+				select#foc_add_type.icons(name="course_type",required)
+					option(value="void",disabled,selected,data-icon="/imgs/select_void.png",class="left circle")=  b_translates.for_modals.nfms.inputs.select
+					for item in init_values.c_type
+						option(value=item.id,data-icon="/imgs/select_void.png",class="left circle")= item.value
+				label(for="foc_add_type")= b_translates.for_modals.nfms.inputs._course_type
+			.input-field
+				i.icon.bitcoin.prefix
+				input(id="foc_add_prix",name="prix",class="",type="number",value="0",required) 
+				label.active(for="foc_add_prix")= b_translates.for_modals.nfms.inputs._prix
+			.input-field
+				i.icon.file.archive.outline.prefix
+				input(id="foc_add_rsc",name="rsc",class="",type="number",required) 
+				label(for="foc_add_rsc")= b_translates.for_modals.nfms.inputs._rsc
+				a(target="_blank",href="/#!message=go_get_rsc_ids")= b_translates.for_modals.nfms.inputs._rsc_link
+			//- input(type="hidden",name="fk")
+			input(type="hidden",name="profs_id")
+		hr
+		section.general
+			.file-field.input-field
+				.btn
+					span: i.icon.image.prefix
+					input(id="fot_add_img",name="img",class="",type="file",style="position: absolute;left: 0;")
+				.file-path-wrapper
+					input.file-path.validate(type="text")
+				label.active(for="fot_add_img")= b_translates.for_modals.nfms.inputs._src
+			.input-field
+				i.icon.info.prefix
+				input(id="fot_add_titre_img",name="titre_img",class="",type="text")
+				label(for="fot_add_titre_img")= b_translates.for_modals.nfms.inputs._titre_img
+			.input-field
+				i.icon.paragraph.prefix
+				textarea.materialize-textarea(id="fot_add_alt",name="alt",class="")
+				label(for="fot_add_alt")= b_translates.for_modals.nfms.inputs._alt
+		input(name="user_id",value="1",type="hidden")
+		input(name="type",type="hidden")
+		hr
+		h2= b_translates.for_modals.nfms.validate.h2
+		input(type="submit")

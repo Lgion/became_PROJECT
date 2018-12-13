@@ -1,0 +1,29 @@
+div.four.wide.column
+	div.ressource
+		.w100.pr.top
+			span.br0 {{date}}
+			a(href="{{lien.href}}",title="{{lien.title}}",data-data="{{id_ressources}}{{id_courses}}") {{lien.html}}
+		nav.w25.br0
+			div.tags {{{tags}}}
+			div.prof
+				- var ok={href:"{{user.href}}",html:"{{user.html}}",title:"{{user.title}}",img:{src:"{{user.img.src}}",alt:"{{user.img.alt}}",title:"{{user.img.title}}"}}
+				+ancre(ok,"","",{a:{"data-data":"{{user.data}}"}})
+			div.type(title="{{type_}}")  <i class="{{type}} r_{{_type}}">r_{{_type}}</i>
+			button.descr(type="button")
+		p.scrolly.bl0.description
+			span.close X
+			| {{descr}}
+		div.bl0.w75
+			div.w50
+				div.likes(data-data="{{likes}}") {{likes_}}
+				div.shares {{shares}}
+				div.views(data-data="{{views}}",data-3months="{{views__}}") {{views_}}
+				div.coms(data-data="{{coms}}") {{coms_}}
+			div.w50
+				div.language
+					i(class="l_{{langue}}") {{langue}}
+					i(class="p_{{pays}}") {{pays}}
+				div.media void
+				div.direct void
+				div.price {{prix}}
+		div.inmodal
