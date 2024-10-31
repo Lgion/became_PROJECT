@@ -58,11 +58,13 @@ exports.matieres=(req,res)=>{
 	// sql=[article parent || liste liens matieres-filiere || liste classes-filiere]
 	sql.push(`select distinct t.fr as article,t.id from matieres m inner join _text t on t.id=concat("filieres_",m.fk) where fk=${id} and t.username="article"`)
 	sql.push(`select fk,id_matieres,t_.fr as lien from matieres m inner join _text_ t_ on id_matieres=t_.id where t_.username="matieres" and fk=${id}`)
-	sql.push(`select id_classes,langue,pays,c.href,c.name,c.title,c.short_descr,c.meta,group_concat(concat(u.nom,"-_-",u.prenom,"-_-",u.pseudo) separator'||') as eleves,v.${lang} as type,c.date,start,end,group_concat(concat(p.href,"-_-",p.name,"-_-",p.title,"-_-",id_profs) separator '||') as profs from classes c inner join _varchar v on type_id=id inner join profs p on id_profs in (prof_ids) left join users u on u.id_user in (c.eleve_ids) where filieres_id=${id} and v.username="cl_type"`)
+	sql.push(`select id_classes,langue,pays,c.href,c.name,c.title,c.short_descr,c.meta,group_concat(concat(u.nom,"-_-",u.prenom,"-_-",u.pseudo) separator'||') as eleves,v.${lang} as type,c.date,start,end,group_concat(concat(p.href,"-_-",p.name,"-_-",p.title,"-_-",id_profs) separator '||') as profs from classes c inner join _varchar v on type_id=id inner join profs p on id_profs in (prof_ids) left join users u on u.id_user in (c.eleve_ids) where filieres_id=${id} and v.username="cl_type" GROUP BY c.id_classes,c.langue,c.pays,c.href,c.name,c.title,c.short_descr,c.meta,v.fr,c.date,c.start,c.end;`)
+	console.log("\n\n\n\n\n\nbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",sql);
 	
 	db.executeTransaction(sql,(data,err)=>{
 		if(err)throw err
 		else{
+			console.log("\n\n\n\n\n\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",data);
 			res.end(JSON.stringify(data))
 		}
 	})
