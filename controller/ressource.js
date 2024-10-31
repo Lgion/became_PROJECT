@@ -75,6 +75,8 @@ exports.sujets=(req,res)=>{
 	sql.push(`select distinct t.${lang} as article,t.id from sujets s inner join _text t on t.id=concat("matieres_",s.fk) where fk=${id} and t.username="article"`)
 	sql.push(`select fk,id_sujets,t_.${lang} as lien from sujets s inner join _text_ t_ on id_sujets=t_.id where t_.username="sujets" and fk=${id}`)
 	sql.push(`select * from profs p inner join users u on p.id_user=u.id_user where id_matieres=${id}`)
+	console.log("\n\n\n\n\n\ncccccccccccccccccccccccccccccccccccccccccccccccc",sql);
+
 	
 	db.executeTransaction(sql,(data,err)=>{
 		if(err)throw err
@@ -83,6 +85,9 @@ exports.sujets=(req,res)=>{
 			console.log(data[0])
 			console.log(data[1])
 			console.log(data[2])
+			if (!data[0].length) {
+                data[0].push({ article: '{"header":{"h":"","img":{"src":"","alt":"","title":""}},"main":{"p":""},"footer":{}}', id: null });
+            }
 			res.end(JSON.stringify(data))
 		}
 	})
@@ -90,8 +95,9 @@ exports.sujets=(req,res)=>{
 exports.courses=(req,res)=>{
 	let id=req.params.id,lang=req.params.lang||req.session.req_.lang,sql=[]
 	sql.push(`select distinct t.${lang} as article,t.id from courses c inner join _text t on t.id=concat("sujets_",c.fk) where fk=${id} and t.username="article"`)
-	sql.push(`select id_courses,pays,langue,c.href,c.name,c.title,c.short_descr,descr,c.date,c.duree,c.likes,c.shares,c.views,c.note,c.coms,type_id,v.${lang} as type,group_concat(concat(id_tags,"_",tags.${lang}) separator "||") as tags,c.profs_id,id_profs,p.href as prof_href,p.name as prof_name,p.title as prof_title,id_user,							prix,c.ressource_ids,fk from courses c inner join profs p on profs_id=id_profs inner join _varchar v on type_id=id inner join tags on id_tags in (tag_ids) where fk=${id} and langue="${lang}" and v.username="c_type"`)
+	sql.push(`select id_courses,pays,langue,c.href,c.name,c.title,c.short_descr,descr,c.date,c.duree,c.likes,c.shares,c.views,c.note,c.coms,type_id,v.${lang} as type,group_concat(concat(id_tags,"_",tags.${lang}) separator "||") as tags,c.profs_id,id_profs,p.href as prof_href,p.name as prof_name,p.title as prof_title,id_user,							prix,c.ressource_ids,fk from courses c inner join profs p on profs_id=id_profs inner join _varchar v on type_id=id inner join tags on id_tags in (tag_ids) where fk=${id} and langue="${lang}" and v.username="c_type" GROUP BY c.id_courses,c.pays,c.langue,c.href,c.name,c.title,c.short_descr,c.descr,c.date,c.duree,c.likes,c.shares,c.views,c.note,c.coms,c.type_id,v.fr,c.profs_id,p.id_profs,p.href,p.name,p.title,p.id_user,c.prix,c.ressource_ids,c.fk;`)
 	sql.push(`select id_ressources,r.pays,r.langue,r.href,r.name,r.title,r.short_descr,r.date,r.likes,r.shares,r.views,r.note,r.coms,type_id,v.${lang} as type,group_concat(concat(id_tags,"_",tags.${lang}) separator "||") as tags,r.profs_id,id_profs,p.href as prof_href,p.name as prof_name,p.title as prof_title,u.id_user,			u.nom,u.prenom,u.pseudo,r.json from ressources r inner join users u on id_user=user_id inner join profs p on id_profs=profs_id inner join _varchar v on type_id=id inner join tags on id_tags in (r.tag_ids) where sujets_id=${id} and langue="${lang}" and v.username="r_type" group by id_ressources`)
+	console.log("\n\n\n\n\n\ndddddddddddddddddddddddddddddddddddddddddddddd",sql);
 	// let tmp=JSON.stringify(sql)
 	// console.log(sql)
 	
