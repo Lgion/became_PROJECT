@@ -116,6 +116,7 @@ exports.courses_=(req,res)=>{
 	sql.push(`select tl from courses where id_courses=${id_c}`)
 	// let tmp=JSON.stringify(sql)
 	// console.log(sql)
+	console.log("\n\n\n\n\n\n-----------eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",sql);
 	
 	db.executeTransaction(sql,(data,err)=>{
 		if(err)throw err
@@ -128,8 +129,9 @@ exports.courses_=(req,res)=>{
 }
 exports.tls=(req,res)=>{
 	let id=req.params.id,tl=unescape(req.params.tl).replace(/"/g,"\\\"").replace(/_--_/g,'/')
-	console.log(tl)
 	let sql="update courses set tl=\""+tl+"\" where id_courses="+id
+	console.log("tls: ", tls)
+	console.log("\n\n\n\n\n\nTLS eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",sql);
 	db.executeSql(sql,function(data,err){
 		if(err)res.end('0')
 		else res.end('1')
@@ -138,8 +140,9 @@ exports.tls=(req,res)=>{
 }
 exports.delete_tl=(req,res)=>{
 	let id=req.params.id,theme=req.params.theme,tl_theme_id=req.params.tl_theme_id
-	console.log(tl)
 	let sql="select tl from courses where id_courses="+id
+	console.log("tl: ", tl)
+	console.log("\n\n\n\n\n\nTL eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",sql);
 	db.executeSql(sql,function(data,err){
 		if(err)res.end('0')
 		else{

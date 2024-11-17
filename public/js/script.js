@@ -6,7 +6,7 @@ ext_to_type={jpg:"img",png:"img",mp4:"video",mp3:"audio",html:"html"},ajax_path=
 type_to_tag={"img":"img","audio":"audio","video":"video"}
 colors_array=["red","blue","green","purple","gold","pink","orange","black","brown"]
 //STARTING POINT FOR NEXT JOB
-// alert(`mettre des boutons pour pouvoir ré-afficher left_output & main_section_\n
+// alert(`mettre des boutons pour pouvoir rï¿½-afficher left_output & main_section_\n
 // `)
 
 $(function(){
@@ -91,12 +91,12 @@ $(function(){
 				
 		})
 		
-//ectte evenement délégué ci-dessous doit pouvoir exploiter des données empilés dans une variable
+//ectte evenement dï¿½lï¿½guï¿½ ci-dessous doit pouvoir exploiter des donnï¿½es empilï¿½s dans une variable
 		$main_section.on('click','a',function(e){
 				$(this).addClass('actived')
 				fonction_qui_traite_la_reponse_xhr_vers_$left_output({context:this})
 		})
-//ectte evenement délégué ci-dessous doit pouvoir exploiter des données empilés dans une variable
+//ectte evenement dï¿½lï¿½guï¿½ ci-dessous doit pouvoir exploiter des donnï¿½es empilï¿½s dans une variable
 		$left_output.on('click','a',function(e){
 				$(this).addClass('actived')
 				fonction_qui_traite_la_reponse_xhr_vers_$main_section_({context:this})
@@ -105,7 +105,7 @@ $(function(){
 				//request some datas to ouput them into $main_section_ and $main_article
 				//
 		})
-//ectte evenement délégué ci-dessous doit pouvoir exploiter des données empilés dans une variable
+//ectte evenement dï¿½lï¿½guï¿½ ci-dessous doit pouvoir exploiter des donnï¿½es empilï¿½s dans une variable
 		$main_section_.on('click','a',function(e){
 				$(this).addClass('actived')
 				fonction_qui_traite_la_reponse_xhr_vers_$main_output({context:this})
@@ -137,7 +137,7 @@ $(function(){
 						break
 				}
 // profs_id PEUT PRENDRE PLUSIEURS VALEURS POUR CHAQUE USER
-// AINSI LE onchange SUR LE select[name=matieres] DOIT REP2RER, GRÂCE A L'OBJECT req_obj.profs_id, SI LE USER PEUT PRETENDRE CONTINUER POUR  CREER UN COURS
+// AINSI LE onchange SUR LE select[name=matieres] DOIT REP2RER, GRï¿½CE A L'OBJECT req_obj.profs_id, SI LE USER PEUT PRETENDRE CONTINUER POUR  CREER UN COURS
 // , OU S'IL DOIT CREER UN PROFESSEUR DANS LA MATIERE CHOISIE AVANT DE CREER LE COURS DANS CETTE MATIERE..
 				$("#form_add_things input[name=profs_id]").val(req_obj.profs_id)
 				
@@ -210,7 +210,7 @@ $(function(){
 						//do something
 				}else{
 						//factices datas
-						let dup="<a href=''>#TAG_</a>",i=0,dup_="<p>Je suis un texte type orem ipsum de présentationJe suis un texte type orem ipsum de présentationJe suis un texte type orem ipsum de présentationJe suis un texte type orem ipsum de présentationJe suis un texte type orem ipsum de présentationJe suis un texte type orem ipsum de présentationJe suis un texte type orem ipsum de présentationJe suis un texte type orem ipsum de présentationJe suis un texte type orem ipsum de présentation</p>"
+						let dup="<a href=''>#TAG_</a>",i=0,dup_="<p>Je suis un texte type orem ipsum de prï¿½sentationJe suis un texte type orem ipsum de prï¿½sentationJe suis un texte type orem ipsum de prï¿½sentationJe suis un texte type orem ipsum de prï¿½sentationJe suis un texte type orem ipsum de prï¿½sentationJe suis un texte type orem ipsum de prï¿½sentationJe suis un texte type orem ipsum de prï¿½sentationJe suis un texte type orem ipsum de prï¿½sentationJe suis un texte type orem ipsum de prï¿½sentation</p>"
 						$(this).closest('section').find('.alpha_tagname').html((dup+i++)+(dup+i++)+(dup+i++)+(dup+i++)+(dup+i++)+(dup+i++)+(dup+i++)+(dup+i++)+(dup+i++))
 						$(this).closest('section').find('.alpha_tagname').append(dup_)
 						// alert('ok'+$(this).closest('section').find('.alpha_tagname').length);
@@ -247,7 +247,7 @@ $(function(){
 						default:
 						break
 				}
-				// alert("Il s'agit ici, d'ouvrir le div.inmodal et d'y insérer quelquechose, en fonction de données dans les attributs")
+				// alert("Il s'agit ici, d'ouvrir le div.inmodal et d'y insï¿½rer quelquechose, en fonction de donnï¿½es dans les attributs")
 		})
 		$main_output_form.find('.choose button').click(function(e){$main_output.find('>div').removeClass("actived");$main_output.find("."+this.parentNode.className.substring(1)).addClass("actived")})
 		// $main_output.on("click",".courses .top a,.ressources .top a",function(e){receive_link(e)})
@@ -302,7 +302,11 @@ $(function(){
 												span.arrayressources[self.dataset.id]=xhr[0]
 												done.push(self.dataset.id)
 												span.dataset.done=JSON.stringify(done)
-												span.tl=JSON.parse(xhr[1][0].tl)
+												
+												span.tl=JSON.parse(xhr[1][0].tl) 
+												// PROPOSITION DE COMPOSER:  (pour la ligne ci-dessus)
+												// span.tl = typeof xhr[1][0].tl === 'string' ? JSON.parse(xhr[1][0].tl) : xhr[1][0].tl;
+												
 												if(!span.tl.phases&&span.className.indexOf('prof')!=-1){
 //	CETTE CONDITION NEST JAMAIS ATTEINTE, LE span NA JAMAIS LA CLASS .prof PUISQUE TOUS LES MODES DOIVENT JOUER LA TIMELINE
 														// $(span).find('.timeline .line .tl').addClass("actived")
@@ -356,7 +360,7 @@ $(function(){
 				tmp=tmp_+":"+_tmp
 				// console.log(tmp)
 				rt.html(tmp)
-				// alert("je repère la position X et Y du clic dnas le conteneur et je lance toutes les actions qui ont lieu du point présent jusqu'au cette instant cliqué")
+				// alert("je repï¿½re la position X et Y du clic dnas le conteneur et je lance toutes les actions qui ont lieu du point prï¿½sent jusqu'au cette instant cliquï¿½")
 		})
 		$section.find('.courses').on('change','._modal .timeline .options>select',function(){
 				if(this.value!="void"){
@@ -385,7 +389,7 @@ $(function(){
 								// alert(tl_opts_add_rsc.rsc[0].innerText)
 								let i={id_phase:tl_select.value,href:tl_opts_add_rsc.rsc[0].href,type:tl_opts_add_rsc.rsc[0].dataset.data,title:tl_opts_add_rsc.rsc[0].innerText,time:tl_add_rsc_time.value}
 								tl.items.push(i)
-						}else{bool_=false; alert("eueoneunVeuillez d'abord chosiir une ressource\nVeuillez indiquer l'instant de départevpijeijif")}
+						}else{bool_=false; alert("eueoneunVeuillez d'abord chosiir une ressource\nVeuillez indiquer l'instant de dï¿½partevpijeijif")}
 						$(this).closest('.timeline').addClass('afterfull')
 						$(this).closest('.options').removeClass('actived')
 						$section.find('._modal .timeline').addClass('afterfull')
@@ -399,7 +403,7 @@ $(function(){
 						tl_opts_add_rsc.rsc=null
 				}else if(tl_opts_modify.value!=""){
 						let tmp=JSON.stringify($(tl_select).find('option:nth('+tl_select.selectedIndex+')')[0].data)
-						let ok=confirm("orjoVous etes sur le point de modifier cete phase :\n"+tmp+"\nEts-vous sûr ?obnienoe")
+						let ok=confirm("orjoVous etes sur le point de modifier cete phase :\n"+tmp+"\nEts-vous sï¿½r ?obnienoe")
 						if(ok)
 								$.get(ajax_path[ajax_path._]+'/_/tls_/modifyphase_dkddonfn',function(xhr){
 										tl_opts_modify.value=""
@@ -414,12 +418,12 @@ $(function(){
 						// if!(xhr_onunload.tls)xhr_onunload.tls=[]
 						// xhr_onunload.tls[$(this).closest('.courses').find('footer button')[0].dataset.id]=tl
 						if(bool){
-								alert("eofijVous pouvez maintenant ajouter des éléments dans la timelineeljfofv\nPour ajouter de nouveaux éléments, il faut selectionner la phase à laquelle ils appartiendront")
+								alert("eofijVous pouvez maintenant ajouter des ï¿½lï¿½ments dans la timelineeljfofv\nPour ajouter de nouveaux ï¿½lï¿½ments, il faut selectionner la phase ï¿½ laquelle ils appartiendront")
 								$(this).closest('.prof').addClass('addable')
 								$(span).find('.timeline .line .void').addClass("nodisplay")
 						}		
 				}
-				else{bool_=false; alert("rbgonorgviVous devez entrer un titre pour la phase, et un instant durant le course (début et fin),fivf")
+				else{bool_=false; alert("rbgonorgviVous devez entrer un titre pour la phase, et un instant durant le course (dï¿½but et fin),fivf")
 				}
 				if(bool_){
 						get_tl(span.tl)
@@ -449,7 +453,7 @@ $(function(){
 							tl_opts_time_.disabled=true
 							$(this).closest('.prof').find('.timeline').removeClass('afterfull')
 							$(this).closest('.prof').find('.options').addClass('actived')
-					}else alert("Aucune phase n'a été créé dns la timeline!\nSinon ce message ne devrai jamais pouvoir s'afficher car si le coursest déjà terminé la fenetre '.prof' n'est pas sencé pouvoir etre affiché")
+					}else alert("Aucune phase n'a ï¿½tï¿½ crï¿½ï¿½ dns la timeline!\nSinon ce message ne devrai jamais pouvoir s'afficher car si le coursest dï¿½jï¿½ terminï¿½ la fenetre '.prof' n'est pas sencï¿½ pouvoir etre affichï¿½")
 					break
 					case"show_r":
 							$(this).closest('.scrolly').find('li').removeClass('actived')
@@ -464,7 +468,7 @@ $(function(){
 					break
 					case"br_r":if(started&&!end){
 							alert("i am broadcasting rassource in live....nigger b!iaaatch")
-					}else alert("eoeXCette opératio ne prut etre effectuée que si le cours a déjà commencéofvnonoen")
+					}else alert("eoeXCette opï¿½ratio ne prut etre effectuï¿½e que si le cours a dï¿½jï¿½ commencï¿½ofvnonoen")
 					break
 					default:break
 				}
@@ -598,12 +602,12 @@ function receive_link(event){
 		//teste sur l'url pour identifier le type du hash
 		//deux cas :
 				//soit il s'agit d'une succession de lien a partir de la racine,
-				//soit il s'agit d'un lien du second type qui fonctionne avec un identifint après le caractère '=', auquel celui (via un switch) actif la fonction associé
+				//soit il s'agit d'un lien du second type qui fonctionne avec un identifint aprï¿½s le caractï¿½re '=', auquel celui (via un switch) actif la fonction associï¿½
 }
 function ancre_type_second(type=false,url=false,object=false){
 		let ext="",tmp,obj,obj_,h,m,f
 		if(object===false){
-				alert("chaque 'case:' doit etre une promesse\nqui lance la fonction (ancre_type_second()) récursivement en y insérant les parametre type,url et object\nsinonancre_type_second() ne fonctionnera pas pour les appel ne résultant d'evts click")
+				alert("chaque 'case:' doit etre une promesse\nqui lance la fonction (ancre_type_second()) rï¿½cursivement en y insï¿½rant les parametre type,url et object\nsinonancre_type_second() ne fonctionnera pas pour les appel ne rï¿½sultant d'evts click")
 				switch(type){
 						case"classes":		$main_output_form.addClass('actived')
 						break
@@ -730,7 +734,7 @@ function get_tl(){
 								left=(s/duree)*100
 								tampon=$('<div/>').attr({"data-start":i.start,"data-end":i.end,class:"phase _"+j,style:"width:"+proportion+"%;border:solid;height:0;color:"+colors_array[j]+";position:absolute;left:"+left+"%;top:"+(j*(100/tl.phases.length))+"%",title:i.title})
 								tampon[0].data=i
-								tampon.onmousemove=function(e){console.log("je repère la position X et Y du clic dnas le conteneur, et j'affiche la valeur 'time' de l'instant")}
+								tampon.onmousemove=function(e){console.log("je repï¿½re la position X et Y du clic dnas le conteneur, et j'affiche la valeur 'time' de l'instant")}
 								TL.append(tampon)
 								if(prof){
 										$(tl_select).append($("<option/>").attr({value:"_"+j}).html(i.title))
@@ -887,9 +891,9 @@ function run_tl(x="live"){
 								alert("LE COURS EST TERMINEEEEEEEEEE!!!")
 								console.log(tmp)
 								console.log(sessionStorage.becamenet)
-								// $.post("/_/endcourse/"+course_footer_btn.dataset.id+"/"+escape(sessionStorage.becamenet),function(xhr){alert("le cours est enregistré avec succès")})
+								// $.post("/_/endcourse/"+course_footer_btn.dataset.id+"/"+escape(sessionStorage.becamenet),function(xhr){alert("le cours est enregistrï¿½ avec succï¿½s")})
 								let url="/_/endcourse/"+course_footer_btn.dataset.id+"/"+escape(sessionStorage.becamenet).replace(/\//g,'|-|')
-								$.post(url,function(xhr){if(xhr==1)alert("le cours est enregistré avec succès");else alert('error : '+xhr)})
+								$.post(url,function(xhr){if(xhr==1)alert("le cours est enregistrï¿½ avec succï¿½s");else alert('error : '+xhr)})
 								console.log(url)
 								masocket.emit("disconnected",'course_'+$section.find('.courses>footer button').data('id'))
 								clearInterval(interval)
@@ -924,7 +928,7 @@ function consocket(prof,students,span){
 				console.log('recieved "public_msg"')
 		})
 		masocket.on('joined_',function(data){
-				if(data.connected)	if($section.find('.students .status .professeur').html()=="")$section.find('.students .status .professeur').append($("<img/>").attr({src:data.img,title:data.pseudo,"data-id":data.id})).append($("<a/>").attr({href:"#",title:"blablabla"}).html('ueniuengIl faurait pouvoir insérer le lien du prof ici.ejej'))
+				if(data.connected)	if($section.find('.students .status .professeur').html()=="")$section.find('.students .status .professeur').append($("<img/>").attr({src:data.img,title:data.pseudo,"data-id":data.id})).append($("<a/>").attr({href:"#",title:"blablabla"}).html('ueniuengIl faurait pouvoir insï¿½rer le lien du prof ici.ejej'))
 											else{$section.find('.students .status .professeur').removeClass('leaved')}
 				else if(data.newuser){data=data.newuser
 						msgflash('courses',b_translates.section.courses.socketio.justcon)
@@ -957,7 +961,7 @@ function consocket(prof,students,span){
 						live.find('.textarea input[type=submit],.textarea button').off("click")
 						live.find('>button').each(function(i,j){
 								if(j.className=="text"||j.className=="ask"){$(j).on("click",function(){live.find('.textarea').slideDown().find('.text_ask').slideDown().find('input[type=submit]')[0].type_=j.className;live.find('.textarea')[0].className="textarea pr nodisplay "+j.className;})}
-								if(j.className=="audio"){/*audio:{optional:[{sourceId:s.value}]}*/j.obj={audio:true,video:false};$(j).click(function(){alert("impossible d'accéder au micro, va savoir pourquoi, ca a marché durant es premier essaie, pi d'un coup plus rien")})}
+								if(j.className=="audio"){/*audio:{optional:[{sourceId:s.value}]}*/j.obj={audio:true,video:false};$(j).click(function(){alert("impossible d'accï¿½der au micro, va savoir pourquoi, ca a marchï¿½ durant es premier essaie, pi d'un coup plus rien")})}
 								if(j.className=="video"){/*j.obj={audio:true,video:true}*/j.obj={video:true}}
 								if(j.className=="screencast"){j.obj={video:{mandatory:{chromeMediaSource:'screen'}}}}
 								if(j.className=="file"){$(j).on("click",function(){live.find('.textarea').addClass('off');live.find('.textarea,.textarea form').slideDown();})}
@@ -1045,7 +1049,7 @@ function consocket(prof,students,span){
 												if(typeof gum_.stream!="undefined"){gum_.stream.getTracks().forEach(function(i){i.stop();alert('ok')});alert('video stopped');}else alert('void');
 												live.find('.textarea,.textarea .gum').slideUp().removeClass('off')
 										}
-								}else alert("iueieuouzVeuillez d'abord lancer l'enregistrement avant de tenter une pause ou un arrêt svp.fuuenuoehoue")
+								}else alert("iueieuouzVeuillez d'abord lancer l'enregistrement avant de tenter une pause ou un arrï¿½t svp.fuuenuoehoue")
 						})
 						let tmp=JSON.parse(sessionStorage.becamenet) 
 						if(!tmp["course_"+course_footer_btn.dataset.id]){
@@ -1058,7 +1062,7 @@ function consocket(prof,students,span){
 				}
 				else if(students){
 						window.onbeforeunload=function(){masocket.emit("student leave",{room:room})}
-						if(data.connected)	if($section.find('.students .status .professeur').html()=="")$section.find('.students .status .professeur').append($("<img/>").attr({src:data.img,title:data.pseudo,"data-id":data.id})).append($("<a/>").attr({href:"#",title:"blablabla"}).html('ueniuengIl faurait pouvoir insérer le lien du prof ici.ejej'))
+						if(data.connected)	if($section.find('.students .status .professeur').html()=="")$section.find('.students .status .professeur').append($("<img/>").attr({src:data.img,title:data.pseudo,"data-id":data.id})).append($("<a/>").attr({href:"#",title:"blablabla"}).html('ueniuengIl faurait pouvoir insï¿½rer le lien du prof ici.ejej'))
 													else{alert('.....je ne sais pas quoi faire encore..')}
 						
 						span.find(".contain .live,.students .textarea input,.rscs .opts .help").off("click")
@@ -1071,7 +1075,7 @@ function consocket(prof,students,span){
 				}
 				else{}
 		})
-		masocket.on('endmedialive',function(data){let tmp=span.find('.contain .live .video video[src!=""],.contain .live .audio audio[src!=""]')[0].src="";alert("iufudfuifvFin du médiaouuoeoue")})
+		masocket.on('endmedialive',function(data){let tmp=span.find('.contain .live .video video[src!=""],.contain .live .audio audio[src!=""]')[0].src="";alert("iufudfuifvFin du mï¿½diaouuoeoue")})
 		masocket.on('fromproflive',function(data){
 				console.log('recieved "fromproflive"')
 				console.log(data)
@@ -1099,7 +1103,7 @@ function consocket(prof,students,span){
 										if(data.type=="answer")msgflash('courses',b_translates.section.courses._modal.live.msg_newanswer)
 										else msgflash('courses',b_translates.section.courses._modal.live.msg_newask)
 								}
-								alert("!!! ATTENTION, il y a des données à insérer dans la timeline!")
+								alert("!!! ATTENTION, il y a des donnï¿½es ï¿½ insï¿½rer dans la timeline!")
 						break
 						break
 						default:break
@@ -1145,7 +1149,7 @@ function fromproflive(data){
 				break;case"live_file":let tmp=ext_to_type[data.value.substring(data.value.lastIndexOf('.')+1)]||"unkown";alert(tmp);live.append($("<section/>").html(b_translates.section.courses._modal.live.thisis_afile).attr({"class":data._+" w50 pr fr_","data-timestamp":data.timestamp,"data-tag":type_to_tag[tmp],"data-src":data.value,"data-asks":"[]"}).append($("<ul/>").append($("<li/>").append($("<i/>").addClass('icon '+type_to_icon[tmp])).attr({title:b_translates.section.courses._modal.live.opt_play,"class":"play_file"})).append($("<li/>").append($("<i/>").addClass('icon Help Circle Outline')).attr({title:b_translates.section.courses._modal.live.opt_ask,"class":"ask"}))))
 				break;case"live_stream_paused":alert(b_translates.section.courses._modal.live.stream_paused);live.find('.'+data.type+" "+data.type).pause()
 				break;case"live_stream_restarted":data.type=data.type=="screencast"?"video":data.type;live.find('.'+data.type+" "+data.type).play()
-				break;case"live_stream_finished":alert("il faut créer un blob amintenant"),liveblob=[]
+				break;case"live_stream_finished":alert("il faut crï¿½er un blob amintenant"),liveblob=[]
 				break;default:break
 		}
 		msgflash('courses',b_translates.section.courses._modal.students.msgs_psl)
