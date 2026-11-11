@@ -34,89 +34,104 @@ exports.renderHome=(req,res)=>{
 		// i.article=JSON.parse(i.article)
 	// })
 	let obj={init:{accueil:accueil,menus:menus,start:start,values:{c_type:JSON.stringify(c_type),courses_tags:JSON.stringify(courses_tags)}},vars:{b_translates:JSON.stringify(b_translates),b_params:JSON.stringify(b_params),world_pays:JSON.stringify(world_pays),form_add_lang:JSON.stringify(form_add_lang),context:req.session.context,req:JSON.stringify(req.session.req_)}}
-	// console.log(obj.init.menus)
-	// console.log(obj.init.menus[0].sousmenu)
-	// console.log("\n\n\n\n\n\n\n")
 	res.render('index',obj)
 }
+exports.renderHomeHtml5=(req,res)=>{
+	const path=require('path')
+	let lang=(req.session&&req.session.req_&&req.session.req_.lang)||"fr"
+	let file=fs.readFileSync(path.join(__dirname,"../public/files/"+lang+".js"),"utf8")
+	eval(file)
+	let payload={
+		accueil:accueil,
+		menus:menus,
+		start:start,
+		c_type:c_type,
+		courses_tags:courses_tags,
+		b_translates:b_translates,
+		b_params:b_params,
+		world_pays:world_pays,
+		form_add_lang:form_add_lang,
+		context:req.session.context,
+		req:req.session.req_
+	}
+	let htmlTpl=fs.readFileSync(path.join(__dirname,"../views/home.html"),"utf8")
+	// Échappement sûr pour un <script type="application/json"> : '<' (</script>, <!--) et séparateurs de ligne U+2028/2029
+	let safeJson=JSON.stringify(payload).replace(/</g,"\\u003c").replace(/\u2028/g,"\\u2028").replace(/\u2029/g,"\\u2029")
+	// Fonction de remplacement : évite l'interprétation des motifs spéciaux ($&, $', $1...) présents dans les données
+	res.type("html").send(htmlTpl.replace("__BECAME_INIT_JSON__",()=>safeJson))
+}
 exports.filieres=(req,res)=>{
-	let id=req.params.id,lang=req.params.lang||req.session.lang,sql=[]
-	sql.push(`select distinct t.fr as article,t.id from filieres f inner join _text t on t.id=concat("niveaux_",f.fk) where fk=${id} and t.username="article"`)
-	sql.push(`select fk,id_filieres,t_.fr as lien from filieres f inner join _text_ t_ on id_filieres=t_.id where t_.username="filieres" and fk=${id}`)
+	let id=req.params.id,lang=req.params.lang||(req.session&&req.session.req_?req.session.req_.lang:"fr"),sql=[]
+	sql.push(`select distinct t.${lang} as article,t.id from filieres f inner join _text t on t.id=concat("niveaux_",f.fk) where fk=${id} and t.username="article"`)
+	sql.push(`select fk,id_filieres,t_.${lang} as lien from filieres f inner join _text_ t_ on id_filieres=t_.id where t_.username="filieres" and fk=${id}`)
 	
-			console.log("yooooooooooooooooo\n\n\n\n\n\n\n\n\n")
 	db.executeTransaction(sql,(data,err)=>{
-			console.log("yyyyyyyyyyyyyo\n\n\n\n\n\n\n\n\n")
-		if(err)throw err
-		else{
+		if(err){
+			console.error(err)
+			res.status(500).end(JSON.stringify({error:err.message}))
+		}else{
 			res.end(JSON.stringify(data))
 		}
 	})
 }
 exports.matieres=(req,res)=>{
-	let id=req.params.id,lang=req.params.lang||req.session.req_.lang,sql=[]
+	let id=req.params.id,lang=req.params.lang||(req.session&&req.session.req_?req.session.req_.lang:"fr"),sql=[]
 	// sql=[article parent || liste liens matieres-filiere || liste classes-filiere]
-	sql.push(`select distinct t.fr as article,t.id from matieres m inner join _text t on t.id=concat("filieres_",m.fk) where fk=${id} and t.username="article"`)
-	sql.push(`select fk,id_matieres,t_.fr as lien from matieres m inner join _text_ t_ on id_matieres=t_.id where t_.username="matieres" and fk=${id}`)
-	sql.push(`select id_classes,langue,pays,c.href,c.name,c.title,c.short_descr,c.meta,group_concat(concat(u.nom,"-_-",u.prenom,"-_-",u.pseudo) separator'||') as eleves,v.${lang} as type,c.date,start,end,group_concat(concat(p.href,"-_-",p.name,"-_-",p.title,"-_-",id_profs) separator '||') as profs from classes c inner join _varchar v on type_id=id inner join profs p on id_profs in (prof_ids) left join users u on u.id_user in (c.eleve_ids) where filieres_id=${id} and v.username="cl_type" GROUP BY c.id_classes,c.langue,c.pays,c.href,c.name,c.title,c.short_descr,c.meta,v.fr,c.date,c.start,c.end;`)
-	console.log("\n\n\n\n\n\nbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",sql);
+	sql.push(`select distinct t.${lang} as article,t.id from matieres m inner join _text t on t.id=concat("filieres_",m.fk) where fk=${id} and t.username="article"`)
+	sql.push(`select fk,id_matieres,t_.${lang} as lien from matieres m inner join _text_ t_ on id_matieres=t_.id where t_.username="matieres" and fk=${id}`)
+	sql.push(`select id_classes,langue,pays,c.href,c.name,c.title,c.short_descr,c.meta,group_concat(distinct concat(u.nom,"-_-",u.prenom,"-_-",u.pseudo) separator '||') as eleves,v.${lang} as type,c.date,start,end,group_concat(distinct concat(p.href,"-_-",p.name,"-_-",p.title,"-_-",id_profs) separator '||') as profs from classes c inner join _varchar v on type_id=id inner join profs p on FIND_IN_SET(id_profs, prof_ids) left join users u on FIND_IN_SET(u.id_user, c.eleve_ids) where filieres_id=${id} and v.username="cl_type" GROUP BY c.id_classes,c.langue,c.pays,c.href,c.name,c.title,c.short_descr,c.meta,v.${lang},c.date,c.start,c.end`)
 	
 	db.executeTransaction(sql,(data,err)=>{
-		if(err)throw err
-		else{
-			console.log("\n\n\n\n\n\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",data);
+		if(err){
+			console.error(err)
+			res.status(500).end(JSON.stringify({error:err.message}))
+		}else{
 			res.end(JSON.stringify(data))
 		}
 	})
 }
 exports.sujets=(req,res)=>{
-	let id=req.params.id,lang=req.params.lang||req.session.req_.lang,sql=[]
+	let id=req.params.id,lang=req.params.lang||(req.session&&req.session.req_?req.session.req_.lang:"fr"),sql=[]
 	// sql=[article parent || liste liens sujets-matiere || liste professeur-matiere]
 	sql.push(`select distinct t.${lang} as article,t.id from sujets s inner join _text t on t.id=concat("matieres_",s.fk) where fk=${id} and t.username="article"`)
 	sql.push(`select fk,id_sujets,t_.${lang} as lien from sujets s inner join _text_ t_ on id_sujets=t_.id where t_.username="sujets" and fk=${id}`)
 	sql.push(`select * from profs p inner join users u on p.id_user=u.id_user where id_matieres=${id}`)
 	
 	db.executeTransaction(sql,(data,err)=>{
-		if(err)throw err
-		else{
-			console.log("exports.sujets")
-			console.log(data[0])
-			console.log(data[1])
-			console.log(data[2])
+		if(err){
+			console.error(err)
+			res.status(500).end(JSON.stringify({error:err.message}))
+		}else{
 			res.end(JSON.stringify(data))
 		}
 	})
 }
 exports.courses=(req,res)=>{
-	let id=req.params.id,lang=req.params.lang||req.session.req_.lang,sql=[]
-	sql.push(`select distinct t.${lang} as article,t.id from courses c inner join _text t on t.id=concat("sujets_",c.fk) where fk=${id} and t.username="article"`)
-	sql.push(`select id_courses,pays,langue,c.href,c.name,c.title,c.short_descr,descr,c.date,c.duree,c.likes,c.shares,c.views,c.note,c.coms,type_id,v.${lang} as type,group_concat(concat(id_tags,"_",tags.${lang}) separator "||") as tags,c.profs_id,id_profs,p.href as prof_href,p.name as prof_name,p.title as prof_title,id_user,							prix,c.ressource_ids,fk from courses c inner join profs p on profs_id=id_profs inner join _varchar v on type_id=id inner join tags on id_tags in (tag_ids) where fk=${id} and langue="${lang}" and v.username="c_type"`)
-	sql.push(`select id_ressources,r.pays,r.langue,r.href,r.name,r.title,r.short_descr,r.date,r.likes,r.shares,r.views,r.note,r.coms,type_id,v.${lang} as type,group_concat(concat(id_tags,"_",tags.${lang}) separator "||") as tags,r.profs_id,id_profs,p.href as prof_href,p.name as prof_name,p.title as prof_title,u.id_user,			u.nom,u.prenom,u.pseudo,r.json from ressources r inner join users u on id_user=user_id inner join profs p on id_profs=profs_id inner join _varchar v on type_id=id inner join tags on id_tags in (r.tag_ids) where sujets_id=${id} and langue="${lang}" and v.username="r_type" group by id_ressources`)
-	// let tmp=JSON.stringify(sql)
-	// console.log(sql)
+	let id=req.params.id,lang=req.params.lang||(req.session&&req.session.req_?req.session.req_.lang:"fr"),sql=[]
+	sql.push(`select distinct t.${lang} as article,t.id from sujets s inner join _text t on t.id=concat("sujets_",s.id_sujets) where s.id_sujets=${id} and t.username="article"`)
+	sql.push(`select id_courses,pays,langue,c.href,c.name,c.title,c.short_descr,descr,c.date,c.duree,c.likes,c.shares,c.views,c.note,c.coms,type_id,v.${lang} as type,group_concat(distinct concat(id_tags,"_",tags.${lang}) separator "||") as tags,c.profs_id,id_profs,p.href as prof_href,p.name as prof_name,p.title as prof_title,id_user,prix,c.ressource_ids,fk from courses c inner join profs p on profs_id=id_profs inner join _varchar v on type_id=id inner join tags on FIND_IN_SET(id_tags, c.tag_ids) where fk=${id} and langue="${lang}" and v.username="c_type" group by c.id_courses,c.pays,c.langue,c.href,c.name,c.title,c.short_descr,c.descr,c.date,c.duree,c.likes,c.shares,c.views,c.note,c.coms,c.type_id,v.${lang},c.profs_id,p.id_profs,p.href,p.name,p.title,p.id_user,c.prix,c.ressource_ids,c.fk`)
+	sql.push(`select id_ressources,r.pays,r.langue,r.href,r.name,r.title,r.short_descr,r.date,r.likes,r.shares,r.views,r.note,r.coms,type_id,v.${lang} as type,group_concat(distinct concat(id_tags,"_",tags.${lang}) separator "||") as tags,r.profs_id,id_profs,p.href as prof_href,p.name as prof_name,p.title as prof_title,u.id_user,u.nom,u.prenom,u.pseudo,r.json from ressources r inner join users u on u.id_user=r.user_id inner join profs p on id_profs=profs_id inner join _varchar v on type_id=id inner join tags on FIND_IN_SET(id_tags, r.tag_ids) where sujets_id=${id} and langue="${lang}" and v.username="r_type" group by r.id_ressources,r.pays,r.langue,r.href,r.name,r.title,r.short_descr,r.date,r.likes,r.shares,r.views,r.note,r.coms,r.type_id,v.${lang},r.profs_id,p.id_profs,p.href,p.name,p.title,u.id_user,u.nom,u.prenom,u.pseudo,r.json`)
 	
 	db.executeTransaction(sql,(data,err)=>{
-		if(err)throw err
-		else{
-			console.log(data)
+		if(err){
+			console.error(err)
+			res.status(500).end(JSON.stringify({error:err.message}))
+		}else{
 			res.end(JSON.stringify(data))
-			
 		}
 	})
 }
 exports.courses_=(req,res)=>{
-	let id=req.params.id,l,id_c=req.params.id_c,lang=req.params.lang||req.session.req_.lang,sql=[]
+	let id=req.params.id,l,id_c=req.params.id_c,lang=req.params.lang||(req.session&&req.session.req_?req.session.req_.lang:"fr"),sql=[]
 	sql.push(`select id_ressources,r.name,r.title,r.json,r.href from ressources r where id_ressources in(${id})`)
 	sql.push(`select tl from courses where id_courses=${id_c}`)
-	// let tmp=JSON.stringify(sql)
-	// console.log(sql)
 	
 	db.executeTransaction(sql,(data,err)=>{
-		if(err)throw err
-		else{
+		if(err){
+			console.error(err)
+			res.status(500).end(JSON.stringify({error:err.message}))
+		}else{
 			res.end(JSON.stringify(data))
-			// res.end(tmp)
-			
 		}
 	})
 }
@@ -132,14 +147,14 @@ exports.tls=(req,res)=>{
 }
 exports.delete_tl=(req,res)=>{
 	let id=req.params.id,theme=req.params.theme,tl_theme_id=req.params.tl_theme_id
-	console.log(tl)
 	let sql="select tl from courses where id_courses="+id
 	db.executeSql(sql,function(data,err){
 		if(err)res.end('0')
 		else{
 			let tl=JSON.parse(data[0].tl)
-			tl=tl[theme][tl_theme_id]
-			sql="update courses set tl=\""+tl+"\" where id_courses="+id
+			if(tl[theme])delete tl[theme][tl_theme_id]
+			let tlStr=JSON.stringify(tl).replace(/"/g,"\\\"")
+			sql="update courses set tl=\""+tlStr+"\" where id_courses="+id
 			db.executeSql(sql,function(data,err){
 				if(err)res.end('0')
 				else res.end('1')
@@ -167,28 +182,25 @@ exports.endcourse=(req,res)=>{
 	console.log(sql)
 	
 	db.executeSql(sql,(data,err)=>{
-		if(err)throw err
-		else{
+		if(err){
+			console.error(err)
+			res.end('0')
+		}else{
 			res.end('1')
 		}
 	})
 }
 exports.form_add_things=(req,res)=>{
 //POUR LES courses, IL FAUT QUE JE CHECK SI L'IDENTIFIANT DE LA RESSOURCE FOURNIE CORRESPOND AU sujets DU COURS
-	// console.log(req.body)
 	let form=new m.Form(),a,reqBody={}
 	form.parse(req,function(err,fields,files){
 		for(a in fields)reqBody[a]=fields[a][0]
 		for(a in files)reqBody[a]=files[a]
-		// console.log(reqBody)
-		// console.log(fields)
-		// for(a in fields)console.log('________'+a)
-		// for(a in files)console.log('________'+a)
 		let sql
-		let fk=reqBody.filieres!="void"?
-			reqBody.matieres!="void"?
-				reqBody.sujets!="void"?
-					reqBody.upper!="void"?
+		let fk=reqBody.filieres&&reqBody.filieres!="void"?
+			reqBody.matieres&&reqBody.matieres!="void"?
+				reqBody.sujets&&reqBody.sujets!="void"?
+					reqBody.upper&&reqBody.upper!="void"?
 						reqBody.upper
 					:reqBody.sujets
 				:reqBody.matieres
@@ -198,20 +210,33 @@ exports.form_add_things=(req,res)=>{
 		console.log("fk = "+fk)
 		console.log("reqBody['type'] = "+reqBody['type'])
 		if(reqBody.type=="niveaux"||reqBody.type=="filieres"||reqBody.type=="matieres"||reqBody.type=="sujets")sql=`insert ${reqBody.type}(alias,user_id,fk) values("${reqBody.alias}","${reqBody.user_id}",${fk})`
-		if(reqBody.type=="courses")sql=`insert ${reqBody.type}(pays,langue,tag_ids,href,name,title,short_descr,descr,tl,date,duree,likes,views,note,coms,type_id,prix,ressource_ids,profs_id,fk) values("${reqBody.pays}","${reqBody.langue}","${reqBody.htag}","${reqBody.url}","${reqBody.label}","${reqBody.titre}","${reqBody.sh_descr}","${reqBody.descr}","{}","${reqBody.date}","${reqBody.duration}","[]","[]","[]","[]","${reqBody.course_type}","${reqBody.prix}","${reqBody.rsc}",${reqBody.profs_id},${fk})`
+		if(reqBody.type=="courses")sql=`insert ${reqBody.type}(pays,langue,tag_ids,href,name,title,short_descr,descr,tl,date,duree,likes,views,note,coms,type_id,prix,ressource_ids,profs_id,fk) values("${reqBody.pays}","${reqBody.langue}","${reqBody.htag}","${reqBody.url}","${reqBody.label}","${reqBody.titre}","${reqBody.sh_descr}","${reqBody.descr}","{\\\"phases\\\":[],\\\"items\\\":[],\\\"live\\\":[]}","${reqBody.date}","${reqBody.duration}","[]","[]","[]","[]","${reqBody.course_type}","${reqBody.prix}","${reqBody.rsc}",${reqBody.profs_id},${fk})`
 		console.log(sql)
 		db.executeSql(sql,(data,err)=>{
 			if(err)res.end('0')
 			else if(reqBody.type=="niveaux"||reqBody.type=="filieres"||reqBody.type=="matieres"||reqBody.type=="sujets"){
-				let lang=`{"href":"${reqBody.url}","html":"${reqBody.label}","title":"${reqBody.titre}","img":{"src":"${reqBody.img}","title":"${reqBody.titre_img}","alt":"${reqBody.alt}"},"meta":{"title":"${reqBody.titre}","descr":"${reqBody.descr}","rs":[{"property":"og;title","content":"_"},{"property":"og:description","content":"_"}],"json-ld":"@content=Thing"}}`.replace(/"/g,"\\\"")
-				sql=`insert _text_(username,id,${req.session.req_.lang}) values("${reqBody.type}","${data.insertId}","${lang}")`
+				let newId=data.insertId
+				let imgSrc=(typeof reqBody.img==="string"&&reqBody.img)?reqBody.img:"/imgs/select_void.png"
+				let lang=JSON.stringify({
+					href:reqBody.url,
+					html:reqBody.label,
+					title:reqBody.titre,
+					img:{src:imgSrc,title:reqBody.titre_img||reqBody.titre,alt:reqBody.alt||reqBody.label},
+					meta:{title:reqBody.titre,descr:reqBody.descr,rs:[{property:"og:title",content:"_"},{property:"og:description",content:"_"}],"json-ld":"@content=Thing"}
+				}).replace(/"/g,"\\\"")
+				sql=`insert _text_(username,id,${req.session.req_.lang}) values("${reqBody.type}","${newId}","${lang}")`
 				console.log(sql)
-				db.executeSql(sql,(data,err)=>{
+				db.executeSql(sql,(data_,err)=>{
 					if(err)res.end('0')
 					else {
-						sql=`insert _text(username,id,${req.session.req_.lang}) values("article","${reqBody.type}_${fk}","{}")`
+						let articleJson=JSON.stringify({
+							header:{h:reqBody.titre||reqBody.label,img:{src:imgSrc,alt:reqBody.alt||reqBody.label,title:reqBody.titre_img||reqBody.titre}},
+							main:{video:"",audio:"",lvideo:"",laudio:"",p:"<p>"+(reqBody.descr||"")+"</p>"},
+							footer:{template:""}
+						}).replace(/"/g,"\\\"")
+						sql=`insert _text(username,id,${req.session.req_.lang}) values("article","${reqBody.type}_${newId}","${articleJson}")`
 						console.log(sql)
-						db.executeSql(sql,(data,err)=>{
+						db.executeSql(sql,(data__,err)=>{
 							if(err)res.end('0')
 							else res.end('1')
 						})
@@ -249,18 +274,10 @@ exports.form_get_things=(req,res)=>{
 exports.teste=(req,res)=>{
 }
 exports.show_sql_on_screen=(req,res)=>{
-	//	article et lien pour les menus 11/10
-	// sql=`SELECT m.id as menus_id,t_.fr as lien,t.fr as article FROM menus m inner join _text t on t.id=concat("menus_",m.id_menus) inner join _text_ t_ on m.id=t_.id where t_.username="menus" and t.username="article"`
-	//	article et lien pour accueil 11/10
-	// sql=`select t.fr as article,t_.fr as lien from _text t inner join _text_ t_ on t.id=t_.username where t_.username="accueil" UNION SELECT m.id,t_.fr as lien,t.fr as article FROM menus m inner join _text t on t.id=concat("menus_",m.id_menus) inner join _text_ t_ on m.id=t_.id where t_.username="menus" and t.username="article"`
-	//	lien pour les niveaux 11/10
-	// sql=`select fk,id_niveaux,_text_.fr as lien from niveaux inner join _text_ on id_niveaux=_text_.id`
-	// sql=``
-	let sql=req.params.sql
-	sql=`select niveaux.id as niveaux_id,_text_.fr as lien from niveaux natural join _text_`
+	let sql=`select niveaux.id_niveaux as niveaux_id,_text_.fr as lien from niveaux inner join _text_ on id_niveaux=_text_.id where _text_.username="niveaux"`
 	
 	db.executeSql(sql,(data,err)=>{
-		if(err)throw err
+		if(err)res.status(500).end(JSON.stringify(err))
 		else res.end(JSON.stringify(data))
 	})
 	

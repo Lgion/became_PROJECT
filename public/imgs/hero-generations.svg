@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" width="720" height="340" role="img" aria-labelledby="hero-gen-title hero-gen-desc">
+  <title id="hero-gen-title">Apprendre à tout âge sur BECAME</title>
+  <desc id="hero-gen-desc">Illustration pastel réunissant un enfant, une étudiante, un professionnel et une grand-mère partageant des savoirs autour d'outils numériques et de livres.</desc>
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eef7f2"/>
+      <stop offset="50%" stop-color="#edf4fc"/>
+      <stop offset="100%" stop-color="#fbf0ea"/>
+    </linearGradient>
+    <linearGradient id="sunGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffe9b3" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#fde2c8" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Soft luminous background -->
+  <rect width="720" height="340" rx="24" fill="url(#bgGrad)"/>
+  <circle cx="610" cy="76" r="54" fill="url(#sunGrad)"/>
+  <circle cx="105" cy="68" r="36" fill="#e5dff7" opacity="0.55"/>
+  <path d="M0 275 Q180 245 360 270 T720 260 L720 340 L0 340 Z" fill="#dfeee5" opacity="0.85"/>
+
+  <!-- Floating knowledge badges (Scolaire, Universitaire, Pro, Passion) -->
+  <g transform="translate(82, 42)">
+    <rect width="110" height="34" rx="17" fill="#ffffff" stroke="#b9dec9" stroke-width="1.5"/>
+    <circle cx="20" cy="17" r="8" fill="#88c9a1"/>
+    <text x="36" y="22" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#2f5241">Scolaires</text>
+  </g>
+  <g transform="translate(238, 28)">
+    <rect width="126" height="34" rx="17" fill="#ffffff" stroke="#bdd5f0" stroke-width="1.5"/>
+    <circle cx="20" cy="17" r="8" fill="#7eb0e6"/>
+    <text x="36" y="22" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#2b4c6f">Universitaires</text>
+  </g>
+  <g transform="translate(405, 36)">
+    <rect width="132" height="34" rx="17" fill="#ffffff" stroke="#d5c6ee" stroke-width="1.5"/>
+    <circle cx="20" cy="17" r="8" fill="#a58bd6"/>
+    <text x="36" y="22" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#463666">Professionnels</text>
+  </g>
+  <g transform="translate(565, 52)">
+    <rect width="112" height="34" rx="17" fill="#ffffff" stroke="#f2cbb7" stroke-width="1.5"/>
+    <circle cx="20" cy="17" r="8" fill="#eea07a"/>
+    <text x="36" y="22" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#6b3d26">Passions</text>
+  </g>
+
+  <!-- Shared table -->
+  <rect x="90" y="250" width="540" height="14" rx="7" fill="#c7d8cf"/>
+  <rect x="150" y="264" width="12" height="56" rx="4" fill="#b0c4b9"/>
+  <rect x="558" y="264" width="12" height="56" rx="4" fill="#b0c4b9"/>
+
+  <!-- Person 1: Child (Collège / Primaire) with open book -->
+  <g transform="translate(135, 132)">
+    <circle cx="40" cy="36" r="22" fill="#f4c7ab"/>
+    <path d="M18 32 Q40 10 62 32 Q56 16 40 16 Q24 16 18 32 Z" fill="#5c4033"/>
+    <circle cx="33" cy="36" r="2.5" fill="#2d3748"/>
+    <circle cx="47" cy="36" r="2.5" fill="#2d3748"/>
+    <path d="M34 45 Q40 50 46 45" stroke="#2d3748" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M14 66 Q40 58 66 66 L74 118 L6 118 Z" fill="#88c9a1"/>
+    <!-- Open book -->
+    <path d="M16 102 L40 110 L64 102 L64 116 L40 122 L16 116 Z" fill="#ffffff" stroke="#6aa884" stroke-width="1.5"/>
+  </g>
+
+  <!-- Person 2: Young University Student with laptop -->
+  <g transform="translate(260, 108)">
+    <circle cx="46" cy="34" r="24" fill="#d99b78"/>
+    <path d="M20 34 Q24 6 46 8 Q68 6 72 34 Q66 18 46 18 Q26 18 20 34 Z" fill="#2b2d42"/>
+    <circle cx="38" cy="34" r="2.5" fill="#1a202c"/>
+    <circle cx="54" cy="34" r="2.5" fill="#1a202c"/>
+    <path d="M39 44 Q46 49 53 44" stroke="#1a202c" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M12 66 Q46 56 80 66 L88 142 L4 142 Z" fill="#7eb0e6"/>
+    <!-- Laptop -->
+    <rect x="22" y="106" width="48" height="32" rx="4" fill="#ffffff" stroke="#5b8ec4" stroke-width="2"/>
+    <circle cx="46" cy="122" r="5" fill="#bdd5f0"/>
+  </g>
+
+  <!-- Person 3: Adult Professional / Teacher explaining -->
+  <g transform="translate(392, 98)">
+    <circle cx="48" cy="36" r="25" fill="#f1c2a5"/>
+    <path d="M23 30 Q48 8 73 30 L70 20 Q48 6 26 20 Z" fill="#4a5568"/>
+    <!-- Glasses -->
+    <rect x="33" y="30" width="12" height="9" rx="2" fill="none" stroke="#4a5568" stroke-width="1.8"/>
+    <rect x="51" y="30" width="12" height="9" rx="2" fill="none" stroke="#4a5568" stroke-width="1.8"/>
+    <line x1="45" y1="34" x2="51" y2="34" stroke="#4a5568" stroke-width="1.8"/>
+    <path d="M40 47 Q48 52 56 47" stroke="#2d3748" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M12 68 Q48 58 84 68 L92 152 L4 152 Z" fill="#a58bd6"/>
+    <!-- Tablet / Presentation -->
+    <rect x="26" y="108" width="44" height="30" rx="4" fill="#ffffff" stroke="#7d64b0" stroke-width="2"/>
+    <line x1="34" y1="118" x2="62" y2="118" stroke="#a58bd6" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="34" y1="126" x2="54" y2="126" stroke="#d5c6ee" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Person 4: Senior / Grandparent sharing passion (music/art/gardening) -->
+  <g transform="translate(524, 114)">
+    <circle cx="44" cy="36" r="24" fill="#eab696"/>
+    <!-- Silver hair bun -->
+    <circle cx="44" cy="10" r="12" fill="#d2dce6"/>
+    <path d="M20 34 Q44 10 68 34 Q60 18 44 18 Q28 18 20 34 Z" fill="#d2dce6"/>
+    <circle cx="36" cy="36" r="2.5" fill="#2d3748"/>
+    <circle cx="52" cy="36" r="2.5" fill="#2d3748"/>
+    <path d="M37 46 Q44 51 51 46" stroke="#2d3748" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M12 66 Q44 56 76 66 L84 136 L4 136 Z" fill="#eea07a"/>
+    <!-- Creative notebook -->
+    <rect x="24" y="104" width="40" height="26" rx="3" fill="#fffaf5" stroke="#d07c54" stroke-width="1.8"/>
+  </g>
+</svg>
+

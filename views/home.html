@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="sauge">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BECAME — Apprendre, partager et grandir ensemble à tout âge</title>
+  <meta name="description" content="Plateforme d'apprentissage intergénérationnelle BECAME : parcours scolaires, universitaires, professionnels et passions en direct ou en replay.">
+  <link rel="stylesheet" href="/css/became-modern.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-topbar">
+      <a href="#!/" class="brand-identity" id="brand-home-link">
+        <span class="brand-badge" aria-hidden="true">B</span>
+        <div class="brand-titles">
+          <h1>BECAME — Apprendre &amp; partager à tout âge</h1>
+          <p>Scolaires · Universitaires · Professionnels · Passions</p>
+        </div>
+      </a>
+
+      <search class="header-search">
+        <form id="global-filter-form" action="/" method="get">
+          <label for="global-search-input" class="sr-only">Rechercher un cours, une matière ou un mot-clé</label>
+          <input
+            type="search"
+            id="global-search-input"
+            name="q"
+            placeholder="Filtrer les cours, matières, ressources ou #tags…"
+            aria-label="Filtrer les cours, matières, ressources ou mots-clés"
+          >
+          <button type="submit" class="btn btn-soft">Filtrer</button>
+        </form>
+      </search>
+
+      <div class="header-actions">
+        <button
+          type="button"
+          class="btn btn-soft"
+          id="role-toggle-btn"
+        >
+          Mode : Professeur (#1)
+        </button>
+
+        <button
+          type="button"
+          class="btn"
+          commandfor="theme-customizer-popover"
+          command="toggle-popover"
+        >
+          Couleurs &amp; Lumière
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          commandfor="entity-form-dialog"
+          command="show-modal"
+        >
+          + Contribuer
+        </button>
+      </div>
+    </div>
+
+    <!-- Popover déclaratif de personnalisation pastel (demande famille Achy-Kindia dans txt.txt) -->
+    <div id="theme-customizer-popover" class="popover-panel" popover>
+      <h2>Personnaliser l'ambiance lumineuse</h2>
+      <p class="popover-hint">
+        Choisissez une palette pastel apaisante ou ajustez la teinte principale :
+      </p>
+      <div class="theme-swatches" role="group" aria-label="Palettes de couleurs pastel">
+        <button type="button" class="theme-swatch-btn" data-theme-choice="sauge" aria-pressed="true">
+          <span class="swatch-dot" style="--swatch: #88c9a1;" aria-hidden="true"></span>
+          Sauge &amp; Ivoire
+        </button>
+        <button type="button" class="theme-swatch-btn" data-theme-choice="azur" aria-pressed="false">
+          <span class="swatch-dot" style="--swatch: #7eb0e6;" aria-hidden="true"></span>
+          Lumière d'Azur
+        </button>
+        <button type="button" class="theme-swatch-btn" data-theme-choice="aurore" aria-pressed="false">
+          <span class="swatch-dot" style="--swatch: #eea07a;" aria-hidden="true"></span>
+          Aurore Poudrée
+        </button>
+        <button type="button" class="theme-swatch-btn" data-theme-choice="lavande" aria-pressed="false">
+          <span class="swatch-dot" style="--swatch: #a58bd6;" aria-hidden="true"></span>
+          Lavande Douce
+        </button>
+      </div>
+      <div class="form-field form-field-spaced">
+        <label for="brand-hue-slider">Nuance personnalisée (<span id="brand-hue-val">152</span>°)</label>
+        <input type="range" id="brand-hue-slider" min="0" max="360" value="152">
+      </div>
+    </div>
+
+    <nav aria-label="Domaines d'apprentissage">
+      <became-mega-menu id="app-mega-menu"></became-mega-menu>
+    </nav>
+  </header>
+
+  <nav class="breadcrumb-bar" aria-label="Fil d'Ariane">
+    <became-breadcrumb id="app-breadcrumb"></became-breadcrumb>
+  </nav>
+
+  <main id="main-content" class="main-workspace">
+    <!-- Bannière d'accueil lumineuse avec illustration intergénérationnelle (txt.txt) -->
+    <section id="hero-welcome" class="hero-welcome" aria-labelledby="hero-welcome-title">
+      <div class="hero-copy">
+        <h2 id="hero-welcome-title">Bienvenue sur BECAME : la connaissance partagée à chaque étape de la vie</h2>
+        <p>
+          Explorez des parcours structurés du collège au doctorat, développez vos compétences professionnelles
+          ou cultivez vos passions en compagnie d'enseignants et d'apprenants de toutes générations.
+        </p>
+        <ul class="hero-highlights">
+          <li>Parcours Scolaires (Pré-collège à Terminale)</li>
+          <li>Cursus Universitaires (BTS, Licence, Master, Doctorat)</li>
+          <li>Formations Professionnelles &amp; Métiers</li>
+          <li>Ateliers Passions &amp; Créativité</li>
+        </ul>
+      </div>
+      <figure class="hero-illustration">
+        <img
+          src="/imgs/hero-generations.svg"
+          alt="Illustration réunissant un enfant, une étudiante, un formateur et une grand-mère apprenant ensemble"
+          width="720"
+          height="340"
+          fetchpriority="high"
+        >
+        <figcaption>Apprendre, transmettre et progresser ensemble, à tout âge.</figcaption>
+      </figure>
+    </section>
+
+    <!-- Grille principale : Explorateur hiérarchique + Article contextuel -->
+    <div class="explorer-article-grid">
+      <became-hierarchy-explorer id="app-explorer"></became-hierarchy-explorer>
+      <became-article-view id="app-article"></became-article-view>
+    </div>
+
+    <!-- Console Catalogue : Classes, Professeurs, Cours, Ressources -->
+    <section id="catalog-section" class="catalog-section" aria-labelledby="catalog-heading">
+      <div class="catalog-toolbar">
+        <div>
+          <h2 id="catalog-heading" class="catalog-title">Console Pédagogique &amp; Catalogue</h2>
+          <p id="catalog-subtitle" class="catalog-subtitle">
+            Sélectionnez un niveau, une filière, une matière ou un sujet pour explorer ses contenus associés.
+          </p>
+        </div>
+        <div class="catalog-tabs" role="tablist" aria-label="Catégories de contenus">
+          <button type="button" role="tab" class="catalog-tab" data-tab="courses" aria-selected="true">
+            Cours (<span data-count="courses">0</span>)
+          </button>
+          <button type="button" role="tab" class="catalog-tab" data-tab="ressources" aria-selected="false">
+            Ressources (<span data-count="ressources">0</span>)
+          </button>
+          <button type="button" role="tab" class="catalog-tab" data-tab="classes" aria-selected="false">
+            Classes (<span data-count="classes">0</span>)
+          </button>
+          <button type="button" role="tab" class="catalog-tab" data-tab="profs" aria-selected="false">
+            Professeurs (<span data-count="profs">0</span>)
+          </button>
+        </div>
+      </div>
+
+      <div id="catalog-grid" class="catalog-grid" role="region" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <!-- Dialog 1 : Visionneuse de Ressource Pédagogique -->
+  <dialog id="resource-viewer-dialog" class="became-dialog" closedby="any" aria-labelledby="resource-dialog-title">
+    <div class="dialog-header">
+      <h2 id="resource-dialog-title">Explorateur de Ressource</h2>
+      <form method="dialog">
+        <button type="submit" value="close" class="btn" autofocus>Fermer</button>
+      </form>
+    </div>
+    <div class="dialog-body">
+      <became-resource-viewer id="app-resource-viewer"></became-resource-viewer>
+    </div>
+  </dialog>
+
+  <!-- Dialog 2 : Salle de Cours Interactive (Timeline & Live/Replay Socket.IO) -->
+  <dialog id="live-classroom-dialog" class="became-dialog" closedby="closerequest" aria-labelledby="classroom-dialog-title">
+    <div class="dialog-header">
+      <h2 id="classroom-dialog-title">Salle de Cours Interactive</h2>
+      <form method="dialog">
+        <button type="submit" value="close" class="btn" autofocus>Quitter la salle</button>
+      </form>
+    </div>
+    <div class="dialog-body">
+      <became-live-classroom id="app-live-classroom"></became-live-classroom>
+    </div>
+  </dialog>
+
+  <!-- Dialog 3 : Formulaire de Contribution / Ajout d'entité -->
+  <dialog id="entity-form-dialog" class="became-dialog" closedby="closerequest" aria-labelledby="entity-form-title">
+    <div class="dialog-header">
+      <h2 id="entity-form-title">Ajouter un élément au catalogue BECAME</h2>
+      <form method="dialog">
+        <button type="submit" value="cancel" class="btn" autofocus>Annuler</button>
+      </form>
+    </div>
+    <div class="dialog-body">
+      <became-entity-form id="app-entity-form"></became-entity-form>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <p class="footer-text">
+      <strong>BECAME LMS</strong> — Architecture HTML5 &amp; Web Components (Custom Elements) ·
+      <a href="/legacy">Voir l'ancienne interface (Jade/Legacy)</a>
+    </p>
+  </footer>
+
+  <!-- Données initiales injectées par le serveur Express -->
+  <script id="became-init-data" type="application/json">__BECAME_INIT_JSON__</script>
+
+  <!-- Chargement conditionnel des polyfills Invoker Commands / Popover / closedby (Modern Web Guidance) -->
+  <script type="module" src="/js/html5-shell.js"></script>
+</body>
+</html>

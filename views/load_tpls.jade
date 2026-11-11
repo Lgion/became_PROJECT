@@ -1,5 +1,37 @@
 .classes_tpl
+	div.four.wide.column
+		div
+			.w100.pr.top
+				span.br0 {{obj_.date}}
+				a(href="{{obj.lien.href}}",title="{{obj.lien.title}}",data-data="{{obj.id}}") {{obj.lien.html}}
+			nav.w25.br0
+				div.type(title="{{obj_.type}}") <i class="icon users"></i> {{obj_.type}}
+				button.descr(type="button")= b_translates.sentences.main_output_btn_descr
+			p.scrolly.bl0.description
+				span.close X
+				| {{obj.descr}}
+			div.bl0.w75
+				div.w50
+					div.likes(title=b_translates.sentences.main_output.eleves_nbr) Élèves : {{obj.eleves_count}}
+					div.views(title=b_translates.sentences.main_output.profs_nbr) Profs : {{obj.profs_count}}
+				div.w50
+					div.language
+						i(class="l_{{obj_.langue}}") {{obj_.langue}}
+						i(class="p_{{obj_.pays}}") {{obj_.pays}}
+			div.inmodal
 .profs_tpl
+	div.four.wide.column
+		div
+			.w100.pr.top
+				a(href="{{obj.lien.href}}",title="{{obj.lien.title}}",data-data="{{obj.id}}") {{obj.lien.html}}
+			p.scrolly.bl0.description.actived
+				| {{obj.descr}}
+			div.bl0.w75
+				div.w50
+					div.likes {{obj_.role}}
+				div.w50
+					div.views {{obj_.email}}
+			div.inmodal
 .ressources_tpl
 	div.four.wide.column
 		div
@@ -317,7 +349,7 @@ form#form_add_things(enctype="multipart/form-data")
 	header
 		h2.niveaux= b_translates.for_modals.titres.niveaux
 		h2.filieres= b_translates.for_modals.titres.filieres
-		h2.matieres= b_translates.for_modals.titres.maiteres
+		h2.matieres= b_translates.for_modals.titres.matieres
 		h2.sujets= b_translates.for_modals.titres.sujets
 		h2.courses= b_translates.for_modals.titres.courses
 		h2.ressources= b_translates.for_modals.titres.ressources

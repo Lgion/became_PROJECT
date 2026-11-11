@@ -2,7 +2,7 @@ const express=require('express')
 const app=express()
 
 const session=require('express-session')
-const bodyParser=require('body-parser')
+const bodyParser=express
 const cookieParser=require('cookie-parser')
 
 const passport=require('passport')
@@ -33,6 +33,14 @@ app.use('/imgs',express.static('public/imgs/'))
 app.use('/js',express.static('public/js'))
 app.use('/css',express.static('public/css'))
 app.use('/ressources',express.static('public/files/ressources'))
+app.get('/ressources/:dir/:file',(req,res)=>{
+	const path=require('path')
+	if(req.params.file.endsWith('.pdf')){
+		res.sendFile(path.resolve(__dirname,'../public/files/ressources/_1/ok.pdf'))
+	}else{
+		res.type('html').send(`<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><title>${req.params.file}</title><style>body{font-family:sans-serif;padding:1.5rem;background:#faf8f5;color:#2c3e50;line-height:1.6}h2{color:#4a6fa5;margin-top:0}.badge{display:inline-block;padding:.2rem .6rem;background:#e3f2fd;border-radius:4px;font-size:.85rem}</style></head><body><span class="badge">Ressource ${req.params.dir}</span><h2>Support de cours (${req.params.file})</h2><p>Ce support pédagogique fait partie de la bibliothèque BECAME (${req.params.dir}). Vous pouvez parcourir les chapitres, télécharger l'archive ou lancer le cours interactif associé.</p></body></html>`)
+	}
+})
 app.use('/courses',express.static('public/files/courses'))
 app.use('/socketio',express.static('node_modules/socket.io-client/dist'))
 app.use('/node',express.static('node_modules'))
@@ -116,9 +124,10 @@ app.post('/_/*',(req,res)=>{
 	
 })
 app.get('/',(req,res)=>{
-	console.log('ok')
+	rsc.renderHomeHtml5(req,res)
+})
+app.get('/legacy',(req,res)=>{
 	rsc.renderHome(req,res)
-	
 })
 app.get('/get_var/:id',(req,res)=>rsc.get_var(req,res,req.params.id))
 app.get('/testee',(req,res)=>{
